@@ -349,9 +349,9 @@ export default function CatalogView({ setCurrentView }: CatalogViewProps) {
               Ver Ofertas Especiales
             </Button>
             <Button
-              onClick={() => window.open("https://instagram.com/materna360oficial", "_blank")}
+              onClick={() => window.open("https://www.instagram.com/360materna/?igsh=NTRydm5nNWxkNGQ1#", "_blank")}
               variant="outline"
-              className="border-white text-white hover:bg-white hover:text-[#790B5A] font-semibold px-6 py-3 rounded-xl transition-all duration-300"
+              className="border-white text-[#97C4C6] hover:bg-white hover:text-[#790B5A] font-semibold px-6 py-3 rounded-xl transition-all duration-300"
             >
               Contactar Asesor
             </Button>

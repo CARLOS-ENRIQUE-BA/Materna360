@@ -185,18 +185,6 @@ export default function Header({ currentView, setCurrentView, onCategorySelect }
                 Tienda
               </Button>
 
-              {/* Categories Button */}
-              <Button
-                variant="ghost"
-                onClick={() => setIsCategoryModalOpen(true)}
-                className={`text-sm font-medium transition-colors duration-200 ${
-                  currentView === "category"
-                    ? "text-[#790B5A] border-b-2 border-[#C15DA4]"
-                    : "text-[#62615F] hover:text-[#790B5A]"
-                }`}
-              >
-                Categorías
-              </Button>
 
               {/* Catalog Button */}
               <Button

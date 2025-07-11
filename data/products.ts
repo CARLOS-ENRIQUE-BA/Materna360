@@ -17,7 +17,7 @@ export const allProducts: Product[] = [
     id: 14,
     name: "Blusa de Lactancia Moderna",
     price: 45.99,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/Productos-fisicos/img2.jpg",
     category: "Ropa Materna",
     description: "Blusa con acceso discreto para lactancia, perfecta para el día a día. Diseño moderno y funcional.",
   },
@@ -25,7 +25,7 @@ export const allProducts: Product[] = [
     id: 15,
     name: "Pantalón Maternal Ajustable",
     price: 65.99,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/Productos-fisicos/img3.jpg",
     category: "Ropa Materna",
     description: "Pantalón con banda elástica ajustable para máxima comodidad durante todo el embarazo.",
   },
@@ -33,9 +33,9 @@ export const allProducts: Product[] = [
   // Lactancia
   {
     id: 2,
-    name: "Cojín de Lactancia Premium",
+    name: "Cojín de Lactancia",
     price: 45.99,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/Lactancia/img4.jpg",
     category: "Lactancia",
     description:
       "Cojín ergonómico diseñado para brindar el máximo confort durante la lactancia. Su forma especial reduce la tensión en brazos, espalda y cuello.",
@@ -45,7 +45,7 @@ export const allProducts: Product[] = [
     id: 6,
     name: "Sujetador de Lactancia",
     price: 29.99,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/Lactancia/img5.jpg",
     category: "Lactancia",
     description: "Sujetador cómodo y funcional para madres lactantes. Diseño sin costuras con copas removibles.",
     featured: true,
@@ -54,7 +54,7 @@ export const allProducts: Product[] = [
     id: 16,
     name: "Extractor de Leche Eléctrico",
     price: 159.99,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/Lactancia/img6.jpg",
     category: "Lactancia",
     description: "Extractor silencioso y eficiente con múltiples velocidades y sistema de masaje natural.",
   },
@@ -64,7 +64,7 @@ export const allProducts: Product[] = [
     id: 3,
     name: "Body para Bebé Orgánico",
     price: 24.99,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/Ropa-bebe/img7.jpg",
     category: "Ropa Bebé",
     description:
       "Body 100% algodón orgánico certificado, libre de químicos y colorantes artificiales. Suave como una caricia para la piel sensible del bebé.",
@@ -74,7 +74,7 @@ export const allProducts: Product[] = [
     id: 17,
     name: "Pijama de Bebé Térmico",
     price: 32.99,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/Ropa-bebe/img8.jpg",
     category: "Ropa Bebé",
     description: "Pijama térmico para mantener al bebé cálido toda la noche. Tejido transpirable y suave.",
   },
@@ -82,17 +82,17 @@ export const allProducts: Product[] = [
     id: 18,
     name: "Conjunto de Bebé 3 Piezas",
     price: 48.99,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/Ropa-bebe/img9.jpg",
     category: "Ropa Bebé",
     description: "Conjunto completo: body, pantalón y gorro en algodón suave. Perfecto para recién nacidos.",
   },
 
-  // Cuidado Personal
+  // Cuidado Personal 
   {
     id: 4,
     name: "Crema Antiestrías Natural",
     price: 32.99,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/Cuidado-personal/img10.jpg",
     category: "Cuidado Personal",
     description:
       "Crema hidratante formulada con ingredientes 100% naturales como manteca de karité, aceite de rosa mosqueta y vitamina E.",
@@ -102,7 +102,7 @@ export const allProducts: Product[] = [
     id: 19,
     name: "Aceite Corporal Maternal",
     price: 28.99,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/Cuidado-personal/img11.jpg",
     category: "Cuidado Personal",
     description: "Aceite nutritivo para hidratar y relajar la piel durante el embarazo. Fórmula natural y segura.",
   },
@@ -110,17 +110,17 @@ export const allProducts: Product[] = [
     id: 20,
     name: "Champú para Bebé Sin Lágrimas",
     price: 18.99,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/Cuidado-personal/img12.jpg",
     category: "Cuidado Personal",
     description: "Champú suave y natural, perfecto para el cabello delicado del bebé. Fórmula sin lágrimas.",
   },
 
-  // Accesorios Bebé
+  // Acesorios-bebe
   {
     id: 5,
     name: "Manta de Bebé Suave",
     price: 38.99,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/Acesorios-bebe/img13.jpg",
     category: "Accesorios Bebé",
     description:
       "Manta ultra suave tejida con fibras hipoalergénicas. Perfecta para mantener al bebé cálido y cómodo durante el descanso.",
@@ -130,7 +130,7 @@ export const allProducts: Product[] = [
     id: 21,
     name: "Móvil Musical para Cuna",
     price: 54.99,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/Acesorios-bebe/img14.jpg",
     category: "Accesorios Bebé",
     description: "Móvil con melodías relajantes y figuras coloridas. Estimula el desarrollo visual y auditivo.",
   },
@@ -138,17 +138,17 @@ export const allProducts: Product[] = [
     id: 22,
     name: "Chupetes Ortodónticos Pack 2",
     price: 15.99,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/Acesorios-bebe/img15.jpg",
     category: "Accesorios Bebé",
     description: "Chupetes diseñados para el desarrollo oral saludable. Pack de 2 unidades en diferentes colores.",
   },
 
-  // Planes Alimenticios
+  // Planes-aimenticios
   {
     id: 101,
     name: "Plan Nutricional Primer Trimestre",
     price: 89.99,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/Planes-aimenticios/img16.jpg",
     category: "Planes Alimenticios",
     description:
       "Plan personalizado con recetas balanceadas, guías nutricionales y seguimiento profesional para las primeras 12 semanas de embarazo.",
@@ -157,7 +157,7 @@ export const allProducts: Product[] = [
     id: 102,
     name: "Suplementos Ácido Fólico Premium",
     price: 34.99,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/Planes-aimenticios/img17.jpg",
     category: "Planes Alimenticios",
     description: "Suplementos esenciales para el desarrollo neural del bebé. Fórmula de alta absorción.",
   },
@@ -165,7 +165,7 @@ export const allProducts: Product[] = [
     id: 103,
     name: "Plan Nutricional Segundo Trimestre",
     price: 94.99,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/Planes-aimenticios/img18.jpg",
     category: "Planes Alimenticios",
     description: "Alimentación balanceada para el crecimiento acelerado del bebé durante el segundo trimestre.",
   },
@@ -173,17 +173,17 @@ export const allProducts: Product[] = [
     id: 104,
     name: "Plan Nutricional Postparto",
     price: 99.99,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/Planes-aimenticios/img19.jpg",
     category: "Planes Alimenticios",
     description: "Recuperación y nutrición especializada para madres lactantes. Incluye recetas y suplementos.",
   },
 
-  // Material Educativo
+  // Material-educativo
   {
     id: 201,
     name: "Guía Completa del Embarazo",
     price: 29.99,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/Material-educativo/img20.jpg",
     category: "Material Educativo",
     description:
       "Manual completo con información actualizada y basada en evidencia científica sobre cada etapa del embarazo, parto y postparto.",
@@ -192,7 +192,7 @@ export const allProducts: Product[] = [
     id: 202,
     name: "Diario de Embarazo Personalizado",
     price: 19.99,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/Material-educativo/img21.jpg",
     category: "Material Educativo",
     description: "Registra cada momento especial de tu embarazo. Incluye espacios para fotos y reflexiones.",
   },
@@ -200,17 +200,17 @@ export const allProducts: Product[] = [
     id: 203,
     name: "Curso Online de Lactancia",
     price: 49.99,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/Material-educativo/img22.jpg",
     category: "Material Educativo",
     description: "Aprende técnicas y resuelve dudas sobre lactancia materna con especialistas certificados.",
   },
 
-  // Snacks Nutritivos
+  // Snacks-nutritivos
   {
     id: 301,
     name: "Galletas de Avena y Hierro",
     price: 12.99,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/Snacks-nutritivos/img23.jpg",
     category: "Snacks Nutritivos",
     description:
       "Galletas artesanales fortificadas con hierro natural para prevenir la anemia durante el embarazo. Deliciosas y nutritivas.",
@@ -219,7 +219,7 @@ export const allProducts: Product[] = [
     id: 302,
     name: "Galletas de Lactancia",
     price: 14.99,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/Snacks-nutritivos/img24.webp",
     category: "Snacks Nutritivos",
     description: "Galletas con ingredientes que estimulan la producción de leche materna. Sabor chocolate y avena.",
   },
@@ -227,7 +227,7 @@ export const allProducts: Product[] = [
     id: 303,
     name: "Barritas de Proteína Maternal",
     price: 24.99,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/Snacks-nutritivos/img25.jpg",
     category: "Snacks Nutritivos",
     description: "Pack de 12 barritas con proteína vegetal y vitaminas esenciales para embarazadas.",
   },
@@ -235,27 +235,27 @@ export const allProducts: Product[] = [
     id: 304,
     name: "Multivitamínico Prenatal",
     price: 39.99,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/Snacks-nutritivos/img26.avif",
     category: "Snacks Nutritivos",
     description:
       "Vitaminas completas para embarazo y lactancia. Fórmula desarrollada por nutricionistas especializados.",
   },
 
-  // Productos adicionales
+  // Productos-adicionales
   {
     id: 11,
     name: "Kit Esencial de Maternidad",
     price: 129.99,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/Productos-adicionales/img27.jpg",
     category: "Kit Completo",
     description:
       "Todo lo que necesitas para tu embarazo en un solo kit. Incluye productos de cuidado, lactancia y bienestar.",
   },
   {
     id: 12,
-    name: "Almohada de Embarazo Premium",
+    name: "Almohada de Embarazo",
     price: 69.99,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/Productos-adicionales/img28.jpg",
     category: "Accesorios Materna",
     description:
       "Almohada ergonómica para un descanso perfecto durante el embarazo. Soporte total para cuerpo y vientre.",
@@ -264,7 +264,7 @@ export const allProducts: Product[] = [
     id: 13,
     name: "Set de Biberones Anticólicos",
     price: 49.99,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/Productos-adicionales/img29.jpg",
     category: "Alimentación Bebé",
     description: "Set completo de biberones con sistema anticólicos. Incluye tetinas de diferentes flujos.",
   },
@@ -308,10 +308,10 @@ export const searchProducts = (query: string): Product[] => {
 export const getProductsWithOffers = (): (Product & { originalPrice: number; discount: number; endDate: string })[] => {
   // Simulamos ofertas para algunos productos
   const productsWithOffers = [
-    { ...getProductById(1)!, originalPrice: 89.99, discount: 30, endDate: "2024-12-31" },
-    { ...getProductById(3)!, originalPrice: 24.99, discount: 30, endDate: "2024-12-25" },
-    { ...getProductById(4)!, originalPrice: 32.99, discount: 30, endDate: "2024-12-28" },
-    { ...getProductById(6)!, originalPrice: 29.99, discount: 30, endDate: "2024-12-30" },
+    { ...getProductById(1)!, originalPrice: 89.99, discount: 30, endDate: "2025-12-31" },
+    { ...getProductById(3)!, originalPrice: 24.99, discount: 30, endDate: "2025-12-25" },
+    { ...getProductById(4)!, originalPrice: 32.99, discount: 30, endDate: "2025-12-28" },
+    { ...getProductById(6)!, originalPrice: 29.99, discount: 30, endDate: "2025-12-30" },
   ]
 
   return productsWithOffers.map((product) => ({

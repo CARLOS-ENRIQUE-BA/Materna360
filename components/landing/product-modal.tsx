@@ -86,22 +86,6 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
                     </div>
                   )}
                 </div>
-
-                {/* Galería de imágenes (simulada) */}
-                <div className="grid grid-cols-4 gap-2">
-                  {[1, 2, 3, 4].map((index) => (
-                    <div
-                      key={index}
-                      className="aspect-square bg-gradient-to-br from-[#FAF8F5] to-[#F6DCD0] rounded-lg border border-[#F6DCD0] flex items-center justify-center cursor-pointer hover:scale-105 transition-transform duration-200"
-                    >
-                      <img
-                        src={product.image || "/placeholder.svg"}
-                        alt={`${product.name} vista ${index}`}
-                        className="w-full h-full object-cover rounded-lg opacity-60 hover:opacity-100 transition-opacity duration-200"
-                      />
-                    </div>
-                  ))}
-                </div>
               </div>
 
               {/* Información del producto */}
@@ -110,7 +94,7 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
                 <div>
                   <h3 className="text-3xl font-bold text-[#790B5A] mb-2">{product.name}</h3>
                   <div className="flex items-center space-x-4 mb-4">
-                    <span className="text-4xl font-bold text-[#790B5A]">${product.price}</span>
+                    <span className="text-4xl font-bold text-[#790B5A]">${product.price.toFixed(2)}</span>
                     <Badge variant="secondary" className="bg-[#F6DCD0] text-[#790B5A]">
                       {product.category}
                     </Badge>
@@ -126,28 +110,6 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
                   <p className="text-[#62615F] leading-relaxed">{product.description}</p>
                 </div>
 
-                {/* Características del producto */}
-                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-[#F6DCD0]">
-                  <h4 className="text-lg font-semibold text-[#790B5A] mb-4">Características</h4>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="flex items-center space-x-2">
-                      <div className="w-2 h-2 bg-[#C15DA4] rounded-full"></div>
-                      <span className="text-sm text-[#62615F]">Calidad Premium</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <div className="w-2 h-2 bg-[#97C4C6] rounded-full"></div>
-                      <span className="text-sm text-[#62615F]">Ingredientes Naturales</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <div className="w-2 h-2 bg-[#E985A6] rounded-full"></div>
-                      <span className="text-sm text-[#62615F]">Certificado Orgánico</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <div className="w-2 h-2 bg-[#BDCCB4] rounded-full"></div>
-                      <span className="text-sm text-[#62615F]">Libre de Químicos</span>
-                    </div>
-                  </div>
-                </div>
 
                 {/* Call to action para registro */}
                 <div className="bg-gradient-to-r from-[#790B5A] to-[#C15DA4] rounded-2xl p-6 text-white text-center">

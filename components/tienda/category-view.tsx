@@ -6,149 +6,8 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { useCart, type Product } from "./cart-context"
 import { useFavorites } from "./favorites-context"
-
-// Productos específicos por categoría
-const categoryProducts: Record<string, Product[]> = {
-  // Planes Alimenticios
-  "Embarazo - Primer Trimestre": [
-    {
-      id: 101,
-      name: "Plan Nutricional Primer Trimestre",
-      price: 89.99,
-      image: "/placeholder.svg?height=300&width=300",
-      category: "Planes Alimenticios",
-      description: "Plan personalizado con recetas y guías nutricionales para las primeras 12 semanas",
-    },
-    {
-      id: 102,
-      name: "Suplementos Ácido Fólico Premium",
-      price: 34.99,
-      image: "/placeholder.svg?height=300&width=300",
-      category: "Planes Alimenticios",
-      description: "Suplementos esenciales para el desarrollo neural del bebé",
-    },
-  ],
-  "Embarazo - Segundo Trimestre": [
-    {
-      id: 103,
-      name: "Plan Nutricional Segundo Trimestre",
-      price: 94.99,
-      image: "/placeholder.svg?height=300&width=300",
-      category: "Planes Alimenticios",
-      description: "Alimentación balanceada para el crecimiento acelerado del bebé",
-    },
-  ],
-  "Postparto y Lactancia": [
-    {
-      id: 104,
-      name: "Plan Nutricional Postparto",
-      price: 99.99,
-      image: "/placeholder.svg?height=300&width=300",
-      category: "Planes Alimenticios",
-      description: "Recuperación y nutrición para madres lactantes",
-    },
-  ],
-
-  // Material Educativo
-  "Guías de Embarazo": [
-    {
-      id: 201,
-      name: "Guía Completa del Embarazo",
-      price: 29.99,
-      image: "/placeholder.svg?height=300&width=300",
-      category: "Material Educativo",
-      description: "Manual completo con todo lo que necesitas saber durante el embarazo",
-    },
-    {
-      id: 202,
-      name: "Diario de Embarazo Personalizado",
-      price: 19.99,
-      image: "/placeholder.svg?height=300&width=300",
-      category: "Material Educativo",
-      description: "Registra cada momento especial de tu embarazo",
-    },
-  ],
-  "Lactancia Materna": [
-    {
-      id: 203,
-      name: "Curso Online de Lactancia",
-      price: 49.99,
-      image: "/placeholder.svg?height=300&width=300",
-      category: "Material Educativo",
-      description: "Aprende técnicas y resuelve dudas sobre lactancia materna",
-    },
-  ],
-
-  // Snacks Nutritivos
-  "Galletas Nutritivas": [
-    {
-      id: 301,
-      name: "Galletas de Avena y Hierro",
-      price: 12.99,
-      image: "/placeholder.svg?height=300&width=300",
-      category: "Snacks Nutritivos",
-      description: "Galletas fortificadas con hierro para prevenir anemia",
-    },
-    {
-      id: 302,
-      name: "Galletas de Lactancia",
-      price: 14.99,
-      image: "/placeholder.svg?height=300&width=300",
-      category: "Snacks Nutritivos",
-      description: "Galletas con ingredientes que estimulan la producción de leche",
-    },
-  ],
-  "Barritas Energéticas": [
-    {
-      id: 303,
-      name: "Barritas de Proteína Maternal",
-      price: 24.99,
-      image: "/placeholder.svg?height=300&width=300",
-      category: "Snacks Nutritivos",
-      description: "Pack de 12 barritas con proteína y vitaminas esenciales",
-    },
-  ],
-  "Pastillas Vitamínicas": [
-    {
-      id: 304,
-      name: "Multivitamínico Prenatal",
-      price: 39.99,
-      image: "/placeholder.svg?height=300&width=300",
-      category: "Snacks Nutritivos",
-      description: "Vitaminas completas para embarazo y lactancia",
-    },
-  ],
-
-  // Productos Físicos (existentes)
-  "Ropa Materna": [
-    {
-      id: 1,
-      name: "Vestido de Maternidad Elegante",
-      price: 89.99,
-      image: "/placeholder.svg?height=300&width=300",
-      category: "Ropa Materna",
-      description: "Vestido cómodo y elegante para todas las etapas del embarazo",
-    },
-  ],
-  Lactancia: [
-    {
-      id: 2,
-      name: "Cojín de Lactancia Premium",
-      price: 45.99,
-      image: "/placeholder.svg?height=300&width=300",
-      category: "Lactancia",
-      description: "Cojín ergonómico para una lactancia cómoda y relajada",
-    },
-    {
-      id: 6,
-      name: "Sujetador de Lactancia",
-      price: 29.99,
-      image: "/placeholder.svg?height=300&width=300",
-      category: "Lactancia",
-      description: "Sujetador cómodo y funcional para madres lactantes",
-    },
-  ],
-}
+import { getProductsByCategory } from "@/data/products"
+import ProductModal from "@/components/landing/product-modal"
 
 interface CategoryViewProps {
   category: string
@@ -156,11 +15,13 @@ interface CategoryViewProps {
 }
 
 export default function CategoryView({ category, setCurrentView }: CategoryViewProps) {
-  const [favorites, setFavorites] = useState<number[]>([])
   const { addToCart } = useCart()
   const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites()
 
-  const products = categoryProducts[category] || []
+  const products = getProductsByCategory(category)
+
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const toggleFavorite = (product: Product) => {
     if (isFavorite(product.id)) {
@@ -182,6 +43,17 @@ export default function CategoryView({ category, setCurrentView }: CategoryViewP
   }
 
   const CategoryIcon = getCategoryIcon(category)
+
+  const handleImageClick = (product: Product) => {
+    // Renamed to clarify it's for image click
+    setSelectedProduct(product)
+    setIsModalOpen(true)
+  }
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+    setSelectedProduct(null)
+  }
 
   return (
     <div className="space-y-8">
@@ -226,7 +98,9 @@ export default function CategoryView({ category, setCurrentView }: CategoryViewP
                   key={product.id}
                   className="bg-white rounded-2xl p-4 shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 border border-[#F6DCD0]"
                 >
-                  <div className="relative mb-4">
+                  <div className="relative mb-4 cursor-pointer" onClick={() => handleImageClick(product)}>
+                    {" "}
+                    {/* Only image click opens modal */}
                     <img
                       src={product.image || "/placeholder.svg"}
                       alt={product.name}
@@ -235,7 +109,10 @@ export default function CategoryView({ category, setCurrentView }: CategoryViewP
                     <Button
                       variant="ghost"
                       size="sm"
-                      onClick={() => toggleFavorite(product)}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        toggleFavorite(product)
+                      }} // Stop propagation for favorite button
                       className="absolute top-2 right-2 bg-white/80 hover:bg-white"
                     >
                       <Heart
@@ -256,7 +133,10 @@ export default function CategoryView({ category, setCurrentView }: CategoryViewP
                   <div className="flex items-center justify-between">
                     <span className="text-xl font-bold text-[#790B5A]">${product.price}</span>
                     <Button
-                      onClick={() => handleAddToCart(product)}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        handleAddToCart(product)
+                      }} // Stop propagation for add to cart button
                       className="bg-gradient-to-r from-[#790B5A] to-[#C15DA4] hover:from-[#C15DA4] hover:to-[#790B5A] text-white rounded-xl transition-all duration-300"
                     >
                       <ShoppingCart className="w-4 h-4 mr-2" />
@@ -303,6 +183,12 @@ export default function CategoryView({ category, setCurrentView }: CategoryViewP
           </div>
         </section>
       )}
+      <ProductModal
+        product={selectedProduct}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        showCallToAction={false}
+      />
     </div>
   )
 }
