@@ -2,6 +2,7 @@
 
 import { Heart, Baby, Instagram, Mail, MapPin, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import Logo from "../../assets/Logo-M360.png"
 
 export default function Footer() {
   return (
@@ -15,15 +16,18 @@ export default function Footer() {
               <div className="relative">
                 <div className="w-12 h-12 bg-gradient-to-br from-[#790B5A] to-[#C15DA4] rounded-full flex items-center justify-center shadow-lg">
                   <div className="flex items-center space-x-1">
-                    <Heart className="w-4 h-4 text-white fill-current" />
-                    <Baby className="w-4 h-4 text-white" />
+                    <img
+                      src={Logo.src}
+                      alt="Logo Materna 360"
+                      className="object-cover w-full h-full"
+                    />
                   </div>
                 </div>
                 <div className="absolute -top-1 -right-1 w-4 h-4 bg-[#97C4C6] rounded-full animate-pulse"></div>
               </div>
               <div>
                 <h3 className="text-2xl font-bold text-[#790B5A]">Materna 360</h3>
-                <p className="text-sm text-[#62615F]">Tu tienda maternal</p>
+                <p className="text-sm text-[#62615F]">Nutrición con ciencia, maternidad con corazón</p>
               </div>
             </div>
             <p className="text-[#62615F] mb-6 max-w-md">
@@ -39,13 +43,13 @@ export default function Footer() {
                 </div>
                 <div>
                   <h4 className="font-semibold text-[#790B5A]">Síguenos en Instagram</h4>
-                  <p className="text-sm text-[#62615F]">@materna360oficial</p>
+                  <p className="text-sm text-[#62615F]">@360materna</p>
                 </div>
               </div>
               <p className="text-sm text-[#62615F] mb-3">Consejos, productos y comunidad maternal</p>
               <Button
                 className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white rounded-xl transition-all duration-300"
-                onClick={() => window.open("https://instagram.com/materna360oficial", "_blank")}
+                onClick={() => window.open("https://www.instagram.com/360materna?igsh=NTRydm5nNWxkNGQ1", "_blank")}
               >
                 <Instagram className="w-4 h-4 mr-2" />
                 Seguir en Instagram
@@ -106,38 +110,11 @@ export default function Footer() {
             <div className="space-y-3">
               <div className="flex items-center space-x-3 text-[#62615F]">
                 <Mail className="w-4 h-4 text-[#C15DA4]" />
-                <span className="text-sm">hola@materna360.com</span>
+                <span className="text-sm">materna360@gmail.com</span>
               </div>
               <div className="flex items-center space-x-3 text-[#62615F]">
                 <Phone className="w-4 h-4 text-[#C15DA4]" />
-                <span className="text-sm">+1 (555) 123-4567</span>
-              </div>
-              <div className="flex items-start space-x-3 text-[#62615F]">
-                <MapPin className="w-4 h-4 text-[#C15DA4] mt-0.5" />
-                <span className="text-sm">
-                  123 Calle Maternal
-                  <br />
-                  Ciudad, Estado 12345
-                </span>
-              </div>
-            </div>
-
-            {/* Newsletter */}
-            <div className="mt-6 p-4 bg-[#FAF8F5] rounded-xl border border-[#BDCCB4]">
-              <h5 className="font-semibold text-[#790B5A] mb-2">Newsletter</h5>
-              <p className="text-xs text-[#62615F] mb-3">Recibe ofertas exclusivas y consejos</p>
-              <div className="flex space-x-2">
-                <input
-                  type="email"
-                  placeholder="tu@email.com"
-                  className="flex-1 px-3 py-2 text-sm border border-[#BDCCB4] focus:border-[#C15DA4] rounded-lg outline-none transition-all duration-300"
-                />
-                <Button
-                  size="sm"
-                  className="bg-gradient-to-r from-[#790B5A] to-[#C15DA4] hover:from-[#C15DA4] hover:to-[#790B5A] text-white rounded-lg"
-                >
-                  <Mail className="w-3 h-3" />
-                </Button>
+                <span className="text-sm">+52 1 961 458 1282</span>
               </div>
             </div>
           </div>
@@ -156,13 +133,13 @@ export default function Footer() {
                 variant="ghost"
                 size="sm"
                 className="text-[#62615F] hover:text-[#790B5A] transition-colors duration-200"
-                onClick={() => window.open("https://instagram.com/materna360oficial", "_blank")}
+                onClick={() => window.open("https://www.instagram.com/360materna?igsh=NTRydm5nNWxkNGQ1", "_blank")}
               >
                 <Instagram className="w-4 h-4" />
               </Button>
               <div className="flex items-center space-x-2 text-sm text-[#62615F]">
                 <span>Síguenos:</span>
-                <span className="font-medium text-[#790B5A]">@materna360oficial</span>
+                <span className="font-medium text-[#790B5A]">@360materna</span>
               </div>
             </div>
           </div>

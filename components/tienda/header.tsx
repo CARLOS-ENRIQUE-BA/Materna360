@@ -9,6 +9,7 @@ import SearchBox from "./search-box"
 import { useFavorites } from "./favorites-context"
 import { useAuth } from "@/contexts/auth-context"
 import { useRouter } from "next/navigation"
+import Logo from "../../assets/Logo-M360.png"
 
 interface HeaderProps {
   currentView: "tienda" | "ofertas" | "category" | "cart" | "checkout" | "favorites" | "catalog"
@@ -50,15 +51,18 @@ export default function Header({ currentView, setCurrentView, onCategorySelect }
               <div className="relative">
                 <div className="w-12 h-12 bg-gradient-to-br from-[#790B5A] to-[#C15DA4] rounded-full flex items-center justify-center shadow-lg">
                   <div className="flex items-center space-x-1">
-                    <Heart className="w-4 h-4 text-white fill-current" />
-                    <Baby className="w-4 h-4 text-white" />
+                    <img
+                      src={Logo.src}
+                      alt="Logo Materna 360"
+                      className="object-cover w-full h-full"
+                    />
                   </div>
                 </div>
                 <div className="absolute -top-1 -right-1 w-4 h-4 bg-[#97C4C6] rounded-full animate-pulse"></div>
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-[#790B5A]">Materna 360</h1>
-                <p className="text-xs text-[#62615F]">Tu tienda maternal</p>
+                <p className="text-xs text-[#62615F]">Nutrición con ciencia, maternidad con corazón</p>
               </div>
             </div>
 

@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import { useAuth } from "@/contexts/auth-context"
+import Logo from "../assets/Logo-M360.png"
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false)
@@ -53,8 +54,11 @@ export default function LoginForm() {
           <div className="relative mb-4">
             <div className="w-20 h-20 mx-auto bg-gradient-to-br from-[#790B5A] to-[#C15DA4] rounded-full flex items-center justify-center shadow-lg transform hover:scale-105 transition-transform duration-300">
               <div className="flex items-center space-x-1">
-                <Heart className="w-6 h-6 text-white fill-current" />
-                <Baby className="w-6 h-6 text-white" />
+                <img
+                  src={Logo.src}
+                  alt="Logo Materna 360"
+                  className="object-cover w-full h-full"
+                />
               </div>
             </div>
             <div className="absolute -top-1 -right-1 w-6 h-6 bg-[#97C4C6] rounded-full animate-pulse"></div>

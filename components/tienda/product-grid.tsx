@@ -131,7 +131,7 @@ export default function ProductGrid({ setCurrentView }: ProductGridProps) {
             <Button
               onClick={() => setCurrentView("categorias")}
               variant="outline"
-              className="border-white text-white hover:bg-white hover:text-[#790B5A] font-semibold px-6 py-3 rounded-xl transition-all duration-300"
+              className="border-white text-[#C15DA4] hover:bg-white hover:text-[#790B5A] font-semibold px-6 py-3 rounded-xl transition-all duration-300"
             >
               Explorar Categorías
             </Button>
@@ -147,13 +147,6 @@ export default function ProductGrid({ setCurrentView }: ProductGridProps) {
               <Star className="w-6 h-6 text-[#C15DA4] mr-2" />
               <h2 className="text-2xl font-bold text-[#790B5A]">Productos Destacados</h2>
             </div>
-            <Button
-              variant="outline"
-              onClick={() => setCurrentView("categorias")}
-              className="border-[#BDCCB4] hover:border-[#C15DA4] hover:bg-[#FAF8F5] text-[#790B5A]"
-            >
-              Ver Todos
-            </Button>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {featuredProducts.map((product) => (
@@ -276,7 +269,7 @@ export default function ProductGrid({ setCurrentView }: ProductGridProps) {
             <Button
               onClick={() => setCurrentView("ofertas")}
               variant="outline"
-              className="border-white text-white hover:bg-white hover:text-[#790B5A] font-semibold px-6 py-3 rounded-xl transition-all duration-300"
+              className="border-white text-[#C15DA4] hover:bg-white hover:text-[#790B5A] font-semibold px-6 py-3 rounded-xl transition-all duration-300"
             >
               Ver Ofertas
             </Button>
