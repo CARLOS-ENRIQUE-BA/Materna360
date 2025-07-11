@@ -15,7 +15,7 @@ const ofertasProducts: (Product & { originalPrice: number; discount: number; end
     price: 62.99,
     originalPrice: 89.99,
     discount: 30,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/Productos-fisicos/img1.jpg",
     category: "Ropa Materna",
     description: "Vestido cómodo y elegante para todas las etapas del embarazo",
     endDate: "2024-12-31",

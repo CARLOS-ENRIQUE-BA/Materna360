@@ -1,5 +1,7 @@
 "use client"
 
+import type React from "react"
+
 import { useState } from "react"
 import { Heart, ShoppingCart, Package, Filter, Grid, List, Search } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -7,265 +9,8 @@ import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { useCart, type Product } from "./cart-context"
 import { useFavorites } from "./favorites-context"
-
-// Base de datos completa de todos los productos
-const allProducts: Product[] = [
-  // Productos físicos - Ropa Materna
-  {
-    id: 1,
-    name: "Vestido de Maternidad Elegante",
-    price: 89.99,
-    image: "/placeholder.svg?height=300&width=300",
-    category: "Ropa Materna",
-    description: "Vestido cómodo y elegante para todas las etapas del embarazo",
-    featured: true,
-  },
-  {
-    id: 14,
-    name: "Blusa de Lactancia Moderna",
-    price: 45.99,
-    image: "/placeholder.svg?height=300&width=300",
-    category: "Ropa Materna",
-    description: "Blusa con acceso discreto para lactancia, perfecta para el día a día",
-  },
-  {
-    id: 15,
-    name: "Pantalón Maternal Ajustable",
-    price: 65.99,
-    image: "/placeholder.svg?height=300&width=300",
-    category: "Ropa Materna",
-    description: "Pantalón con banda elástica ajustable para máxima comodidad",
-  },
-
-  // Lactancia
-  {
-    id: 2,
-    name: "Cojín de Lactancia Premium",
-    price: 45.99,
-    image: "/placeholder.svg?height=300&width=300",
-    category: "Lactancia",
-    description: "Cojín ergonómico para una lactancia cómoda y relajada",
-    featured: true,
-  },
-  {
-    id: 6,
-    name: "Sujetador de Lactancia",
-    price: 29.99,
-    image: "/placeholder.svg?height=300&width=300",
-    category: "Lactancia",
-    description: "Sujetador cómodo y funcional para madres lactantes",
-    featured: true,
-  },
-  {
-    id: 16,
-    name: "Extractor de Leche Eléctrico",
-    price: 159.99,
-    image: "/placeholder.svg?height=300&width=300",
-    category: "Lactancia",
-    description: "Extractor silencioso y eficiente con múltiples velocidades",
-  },
-
-  // Ropa Bebé
-  {
-    id: 3,
-    name: "Body para Bebé Orgánico",
-    price: 24.99,
-    image: "/placeholder.svg?height=300&width=300",
-    category: "Ropa Bebé",
-    description: "Body 100% algodón orgánico, suave para la piel del bebé",
-    featured: true,
-  },
-  {
-    id: 17,
-    name: "Pijama de Bebé Térmico",
-    price: 32.99,
-    image: "/placeholder.svg?height=300&width=300",
-    category: "Ropa Bebé",
-    description: "Pijama térmico para mantener al bebé cálido toda la noche",
-  },
-  {
-    id: 18,
-    name: "Conjunto de Bebé 3 Piezas",
-    price: 48.99,
-    image: "/placeholder.svg?height=300&width=300",
-    category: "Ropa Bebé",
-    description: "Conjunto completo: body, pantalón y gorro en algodón suave",
-  },
-
-  // Cuidado Personal
-  {
-    id: 4,
-    name: "Crema Antiestrías Natural",
-    price: 32.99,
-    image: "/placeholder.svg?height=300&width=300",
-    category: "Cuidado Personal",
-    description: "Crema hidratante con ingredientes naturales para prevenir estrías",
-    featured: true,
-  },
-  {
-    id: 19,
-    name: "Aceite Corporal Maternal",
-    price: 28.99,
-    image: "/placeholder.svg?height=300&width=300",
-    category: "Cuidado Personal",
-    description: "Aceite nutritivo para hidratar y relajar la piel durante el embarazo",
-  },
-  {
-    id: 20,
-    name: "Champú para Bebé Sin Lágrimas",
-    price: 18.99,
-    image: "/placeholder.svg?height=300&width=300",
-    category: "Cuidado Personal",
-    description: "Champú suave y natural, perfecto para el cabello delicado del bebé",
-  },
-
-  // Accesorios Bebé
-  {
-    id: 5,
-    name: "Manta de Bebé Suave",
-    price: 38.99,
-    image: "/placeholder.svg?height=300&width=300",
-    category: "Accesorios Bebé",
-    description: "Manta ultra suave y cálida para el descanso del bebé",
-    featured: true,
-  },
-  {
-    id: 21,
-    name: "Móvil Musical para Cuna",
-    price: 54.99,
-    image: "/placeholder.svg?height=300&width=300",
-    category: "Accesorios Bebé",
-    description: "Móvil con melodías relajantes y figuras coloridas",
-  },
-  {
-    id: 22,
-    name: "Chupetes Ortodónticos Pack 2",
-    price: 15.99,
-    image: "/placeholder.svg?height=300&width=300",
-    category: "Accesorios Bebé",
-    description: "Chupetes diseñados para el desarrollo oral saludable",
-  },
-
-  // Planes Alimenticios
-  {
-    id: 101,
-    name: "Plan Nutricional Primer Trimestre",
-    price: 89.99,
-    image: "/placeholder.svg?height=300&width=300",
-    category: "Planes Alimenticios",
-    description: "Plan personalizado con recetas y guías nutricionales para las primeras 12 semanas",
-  },
-  {
-    id: 102,
-    name: "Suplementos Ácido Fólico Premium",
-    price: 34.99,
-    image: "/placeholder.svg?height=300&width=300",
-    category: "Planes Alimenticios",
-    description: "Suplementos esenciales para el desarrollo neural del bebé",
-  },
-  {
-    id: 103,
-    name: "Plan Nutricional Segundo Trimestre",
-    price: 94.99,
-    image: "/placeholder.svg?height=300&width=300",
-    category: "Planes Alimenticios",
-    description: "Alimentación balanceada para el crecimiento acelerado del bebé",
-  },
-  {
-    id: 104,
-    name: "Plan Nutricional Postparto",
-    price: 99.99,
-    image: "/placeholder.svg?height=300&width=300",
-    category: "Planes Alimenticios",
-    description: "Recuperación y nutrición para madres lactantes",
-  },
-
-  // Material Educativo
-  {
-    id: 201,
-    name: "Guía Completa del Embarazo",
-    price: 29.99,
-    image: "/placeholder.svg?height=300&width=300",
-    category: "Material Educativo",
-    description: "Manual completo con todo lo que necesitas saber durante el embarazo",
-  },
-  {
-    id: 202,
-    name: "Diario de Embarazo Personalizado",
-    price: 19.99,
-    image: "/placeholder.svg?height=300&width=300",
-    category: "Material Educativo",
-    description: "Registra cada momento especial de tu embarazo",
-  },
-  {
-    id: 203,
-    name: "Curso Online de Lactancia",
-    price: 49.99,
-    image: "/placeholder.svg?height=300&width=300",
-    category: "Material Educativo",
-    description: "Aprende técnicas y resuelve dudas sobre lactancia materna",
-  },
-
-  // Snacks Nutritivos
-  {
-    id: 301,
-    name: "Galletas de Avena y Hierro",
-    price: 12.99,
-    image: "/placeholder.svg?height=300&width=300",
-    category: "Snacks Nutritivos",
-    description: "Galletas fortificadas con hierro para prevenir anemia",
-  },
-  {
-    id: 302,
-    name: "Galletas de Lactancia",
-    price: 14.99,
-    image: "/placeholder.svg?height=300&width=300",
-    category: "Snacks Nutritivos",
-    description: "Galletas con ingredientes que estimulan la producción de leche",
-  },
-  {
-    id: 303,
-    name: "Barritas de Proteína Maternal",
-    price: 24.99,
-    image: "/placeholder.svg?height=300&width=300",
-    category: "Snacks Nutritivos",
-    description: "Pack de 12 barritas con proteína y vitaminas esenciales",
-  },
-  {
-    id: 304,
-    name: "Multivitamínico Prenatal",
-    price: 39.99,
-    image: "/placeholder.svg?height=300&width=300",
-    category: "Snacks Nutritivos",
-    description: "Vitaminas completas para embarazo y lactancia",
-  },
-
-  // Productos adicionales
-  {
-    id: 11,
-    name: "Kit Esencial de Maternidad",
-    price: 129.99,
-    image: "/placeholder.svg?height=300&width=300",
-    category: "Kit Completo",
-    description: "Todo lo que necesitas para tu embarazo en un solo kit",
-  },
-  {
-    id: 12,
-    name: "Almohada de Embarazo Premium",
-    price: 69.99,
-    image: "/placeholder.svg?height=300&width=300",
-    category: "Accesorios Materna",
-    description: "Almohada ergonómica para un descanso perfecto",
-  },
-  {
-    id: 13,
-    name: "Set de Biberones Anticólicos",
-    price: 49.99,
-    image: "/placeholder.svg?height=300&width=300",
-    category: "Alimentación Bebé",
-    description: "Set completo de biberones con sistema anticólicos",
-  },
-]
+import { allProducts, getCategories } from "@/data/products"
+import ProductModal from "@/components/landing/product-modal" // Import ProductModal
 
 interface CatalogViewProps {
   setCurrentView: (view: "tienda" | "ofertas" | "category" | "cart" | "checkout" | "favorites" | "catalog") => void
@@ -277,11 +22,15 @@ export default function CatalogView({ setCurrentView }: CatalogViewProps) {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
   const [sortBy, setSortBy] = useState<"name" | "price-low" | "price-high" | "category">("name")
 
+  // State for Product Modal
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
+
   const { addToCart } = useCart()
   const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites()
 
   // Obtener categorías únicas
-  const categories = ["all", ...Array.from(new Set(allProducts.map((product) => product.category)))]
+  const categories = ["all", ...getCategories()]
 
   // Filtrar y ordenar productos
   const filteredProducts = allProducts
@@ -307,7 +56,8 @@ export default function CatalogView({ setCurrentView }: CatalogViewProps) {
       }
     })
 
-  const toggleFavorite = (product: Product) => {
+  const toggleFavorite = (product: Product, e: React.MouseEvent) => {
+    e.stopPropagation() // Prevent modal from opening
     if (isFavorite(product.id)) {
       removeFromFavorites(product.id)
     } else {
@@ -315,8 +65,19 @@ export default function CatalogView({ setCurrentView }: CatalogViewProps) {
     }
   }
 
-  const handleAddToCart = (product: Product) => {
+  const handleAddToCart = (product: Product, e: React.MouseEvent) => {
+    e.stopPropagation() // Prevent modal from opening
     addToCart(product)
+  }
+
+  const openProductModal = (product: Product) => {
+    setSelectedProduct(product)
+    setIsModalOpen(true)
+  }
+
+  const closeProductModal = () => {
+    setIsModalOpen(false)
+    setSelectedProduct(null)
   }
 
   return (
@@ -465,7 +226,7 @@ export default function CatalogView({ setCurrentView }: CatalogViewProps) {
                   {viewMode === "grid" ? (
                     // Vista Grid
                     <>
-                      <div className="relative mb-4">
+                      <div className="relative mb-4 cursor-pointer" onClick={() => openProductModal(product)}>
                         <img
                           src={product.image || "/placeholder.svg"}
                           alt={product.name}
@@ -477,7 +238,7 @@ export default function CatalogView({ setCurrentView }: CatalogViewProps) {
                         <Button
                           variant="ghost"
                           size="sm"
-                          onClick={() => toggleFavorite(product)}
+                          onClick={(e) => toggleFavorite(product, e)}
                           className="absolute top-2 right-2 bg-white/80 hover:bg-white"
                         >
                           <Heart
@@ -498,7 +259,7 @@ export default function CatalogView({ setCurrentView }: CatalogViewProps) {
                       <div className="flex items-center justify-between">
                         <span className="text-xl font-bold text-[#790B5A]">${product.price}</span>
                         <Button
-                          onClick={() => handleAddToCart(product)}
+                          onClick={(e) => handleAddToCart(product, e)}
                           className="bg-gradient-to-r from-[#790B5A] to-[#C15DA4] hover:from-[#C15DA4] hover:to-[#790B5A] text-white rounded-xl transition-all duration-300"
                         >
                           <ShoppingCart className="w-4 h-4 mr-2" />
@@ -509,7 +270,7 @@ export default function CatalogView({ setCurrentView }: CatalogViewProps) {
                   ) : (
                     // Vista Lista
                     <>
-                      <div className="relative flex-shrink-0">
+                      <div className="relative flex-shrink-0 cursor-pointer" onClick={() => openProductModal(product)}>
                         <img
                           src={product.image || "/placeholder.svg"}
                           alt={product.name}
@@ -518,7 +279,7 @@ export default function CatalogView({ setCurrentView }: CatalogViewProps) {
                         <Button
                           variant="ghost"
                           size="sm"
-                          onClick={() => toggleFavorite(product)}
+                          onClick={(e) => toggleFavorite(product, e)}
                           className="absolute -top-2 -right-2 bg-white/80 hover:bg-white w-6 h-6 p-0 rounded-full"
                         >
                           <Heart
@@ -541,7 +302,7 @@ export default function CatalogView({ setCurrentView }: CatalogViewProps) {
                         </div>
                         <p className="text-sm text-[#62615F] mb-3 line-clamp-2">{product.description}</p>
                         <Button
-                          onClick={() => handleAddToCart(product)}
+                          onClick={(e) => handleAddToCart(product, e)}
                           className="bg-gradient-to-r from-[#790B5A] to-[#C15DA4] hover:from-[#C15DA4] hover:to-[#790B5A] text-white rounded-xl transition-all duration-300"
                         >
                           <ShoppingCart className="w-4 h-4 mr-2" />
@@ -597,6 +358,14 @@ export default function CatalogView({ setCurrentView }: CatalogViewProps) {
           </div>
         </div>
       </section>
+
+      {/* Product Modal */}
+      <ProductModal
+        product={selectedProduct}
+        isOpen={isModalOpen}
+        onClose={closeProductModal}
+        showCallToAction={false} // Ensure CTA is not shown in CatalogView
+      />
     </div>
   )
 }

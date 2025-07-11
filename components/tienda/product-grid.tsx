@@ -13,7 +13,7 @@ const featuredProducts: Product[] = [
     id: 1,
     name: "Vestido de Maternidad Elegante",
     price: 89.99,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "/Productos-fisicos/img1.jpg",
     category: "Ropa Materna",
     description: "Vestido cómodo y elegante para todas las etapas del embarazo",
     featured: true,

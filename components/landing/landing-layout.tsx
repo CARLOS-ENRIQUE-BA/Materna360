@@ -8,6 +8,7 @@ import ValuesSection from "./values-section"
 import Footer from "./landing-footer"
 import ScrollProgress from "./scroll-progress"
 import FloatingElements from "./floating-elements"
+import CatalogSection from "./catalog-section"
 
 export default function LandingLayout() {
   return (
@@ -20,6 +21,7 @@ export default function LandingLayout() {
         <MissionSection />
         <VisionSection />
         <ValuesSection />
+        <CatalogSection />
       </main>
 
       <Footer />
