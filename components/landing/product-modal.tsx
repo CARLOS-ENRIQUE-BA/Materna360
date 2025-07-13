@@ -1,21 +1,31 @@
 "use client"
 
 import { useState } from "react"
-import { X, Star, Package, Info } from "lucide-react"
+import { X, Star, Package, Info, ShoppingCart } from "lucide-react" // Added ShoppingCart icon
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import type { Product } from "@/components/tienda/cart-context"
+import { useCart } from "@/components/tienda/cart-context" // Import useCart
 
 interface ProductModalProps {
   product: Product | null
   isOpen: boolean
   onClose: () => void
+  showCallToAction?: boolean // New prop to control CTA visibility
 }
 
-export default function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
+export default function ProductModal({ product, isOpen, onClose, showCallToAction = true }: ProductModalProps) {
   const [imageLoaded, setImageLoaded] = useState(false)
+  const { addToCart } = useCart() // Use the cart context
 
   if (!isOpen || !product) return null
+
+  const handleAddToCart = () => {
+    if (product) {
+      addToCart(product)
+      onClose() // Optionally close modal after adding to cart
+    }
+  }
 
   return (
     <>
@@ -94,7 +104,7 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
                 <div>
                   <h3 className="text-3xl font-bold text-[#790B5A] mb-2">{product.name}</h3>
                   <div className="flex items-center space-x-4 mb-4">
-                    <span className="text-4xl font-bold text-[#790B5A]">${product.price.toFixed(2)}</span>
+                    <span className="text-4xl font-bold text-[#790B5A]">${product.price}</span>
                     <Badge variant="secondary" className="bg-[#F6DCD0] text-[#790B5A]">
                       {product.category}
                     </Badge>
@@ -110,29 +120,42 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
                   <p className="text-[#62615F] leading-relaxed">{product.description}</p>
                 </div>
 
-
-                {/* Call to action para registro */}
-                <div className="bg-gradient-to-r from-[#790B5A] to-[#C15DA4] rounded-2xl p-6 text-white text-center">
-                  <h4 className="text-xl font-bold mb-2">¿Te interesa este producto?</h4>
-                  <p className="text-white/90 mb-4">
-                    Regístrate para acceder a nuestra tienda completa y realizar compras
-                  </p>
-                  <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
+                {/* Conditional Call to action or Add to Cart button */}
+                {showCallToAction ? (
+                  <div className="bg-gradient-to-r from-[#790B5A] to-[#C15DA4] rounded-2xl p-6 text-white text-center">
+                    <h4 className="text-xl font-bold mb-2">¿Te interesa este producto?</h4>
+                    <p className="text-white/90 mb-4">
+                      Regístrate para acceder a nuestra tienda completa y realizar compras
+                    </p>
+                    <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
+                      <Button
+                        onClick={() => window.open("/register", "_blank")}
+                        className="flex-1 bg-white text-[#790B5A] hover:bg-gray-100 font-semibold rounded-xl transition-all duration-300"
+                      >
+                        Crear Cuenta
+                      </Button>
+                      <Button
+                        onClick={() => window.open("/login", "_blank")}
+                        variant="outline"
+                        className="flex-1 border-white text-[#C15DA4] hover:bg-white hover:text-[#790B5A] font-semibold rounded-xl transition-all duration-300"
+                      >
+                        Iniciar Sesión
+                      </Button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="bg-gradient-to-r from-[#790B5A] to-[#C15DA4] rounded-2xl p-6 text-white text-center">
+                    <h4 className="text-xl font-bold mb-2">¡Listo para tu carrito!</h4>
+                    <p className="text-white/90 mb-4">Añade este producto a tu carrito y continúa explorando.</p>
                     <Button
-                      onClick={() => window.open("/register", "_blank")}
-                      className="flex-1 bg-white text-[#790B5A] hover:bg-gray-100 font-semibold rounded-xl transition-all duration-300"
+                      onClick={handleAddToCart}
+                      className="w-full bg-white text-[#790B5A] hover:bg-gray-100 font-semibold rounded-xl transition-all duration-300 flex items-center justify-center"
                     >
-                      Crear Cuenta
-                    </Button>
-                    <Button
-                      onClick={() => window.open("/login", "_blank")}
-                      variant="outline"
-                      className="flex-1 border-white text-white hover:bg-white hover:text-[#790B5A] font-semibold rounded-xl transition-all duration-300"
-                    >
-                      Iniciar Sesión
+                      <ShoppingCart className="w-5 h-5 mr-2" />
+                      Agregar al Carrito
                     </Button>
                   </div>
-                </div>
+                )}
 
                 {/* Información adicional */}
                 <div className="text-center text-sm text-[#62615F] bg-[#FAF8F5] rounded-xl p-4 border border-[#F6DCD0]">

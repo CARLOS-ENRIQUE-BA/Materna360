@@ -177,6 +177,46 @@ export const allProducts: Product[] = [
     category: "Planes Alimenticios",
     description: "Recuperación y nutrición especializada para madres lactantes. Incluye recetas y suplementos.",
   },
+  {
+    id: 105,
+    name: "Plan Alimenticio Personalizado para Embarazadas",
+    price: 119.99,
+    image: "/Planes-aimenticios/img20.jpeg",
+    category: "Planes Alimenticios",
+    description: "Plan nutricional adaptado a tus necesidades y etapa del embarazo. Incluye menú semanal, recetas, lista de compras y seguimiento profesional.",
+  },
+  {
+    id: 106,
+    name: "Plan Nutricional Postparto y Lactancia",
+    price: 109.99,
+    image: "/Planes-aimenticios/img21.jpg",
+    category: "Planes Alimenticios",
+    description: "Plan alimenticio diseñado para la recuperación postparto y apoyo a la lactancia. Incluye recetas energéticas, guía de hidratación y asesoría personalizada.",
+  },
+  {
+    id: 107,
+    name: "Plan de Alimentación Complementaria para Bebés (6-12 meses)",
+    price: 89.99,
+    image: "/Planes-aimenticios/img22.jpg",
+    category: "Planes Alimenticios",
+    description: "Guía paso a paso para la introducción de alimentos sólidos, recetas, menú semanal y recomendaciones para prevenir alergias.",
+  },
+  {
+    id: 108,
+    name: "Plan Nutricional para Niños Pequeños (1-5 años)",
+    price: 99.99,
+    image: "/Planes-aimenticios/img23.jpg",
+    category: "Planes Alimenticios",
+    description: "Plan personalizado para niños pequeños, con menús balanceados, recetas divertidas y consejos para fomentar hábitos saludables.",
+  },
+  {
+    id: 109,
+    name: "Plan Familiar Saludable",
+    price: 129.99,
+    image: "/Planes-aimenticios/img24.png",
+    category: "Planes Alimenticios",
+    description: "Plan alimenticio integral para toda la familia, adaptado a las necesidades de cada miembro, con recetas fáciles y nutritivas.",
+  },
 
   // Material-educativo
   {
@@ -239,6 +279,13 @@ export const allProducts: Product[] = [
     category: "Snacks Nutritivos",
     description:
       "Vitaminas completas para embarazo y lactancia. Fórmula desarrollada por nutricionistas especializados.",
+  },{
+    id: 305,
+    name: "MIX PACK NÜWA KETO",
+    price: 19.99,
+    image: "/Snacks-nutritivos/img27.jpg",
+    category: "Snacks Nutritivos",
+    description: "Barritas de Cacao, Coco y Quinoa - Veganas - Snack Saludable - Vitamina E - Sin Azúcar Añadida - 15 pz - Ingredientes Naturales - Sin Conservadores - Sin Gluten",
   },
 
   // Productos-adicionales
@@ -336,10 +383,10 @@ export const getCategories = (): string[] => {
 export const getProductsForLanding = (): Product[] => {
   // Selección curada para la landing page
   return [
-    ...getFeaturedProducts().slice(0, 4), // 4 productos destacados
-    ...getProductsByCategory("Planes Alimenticios").slice(0, 1),
-    ...getProductsByCategory("Material Educativo").slice(0, 1),
-    ...getProductsByCategory("Snacks Nutritivos").slice(0, 1),
-    ...getProductsByCategory("Cuidado Personal").slice(0, 1),
+    ...getFeaturedProducts().filter(p => p.category === "Planes Alimenticios" || p.category === "Snacks Nutritivos"),
+    ...getProductsByCategory("Planes Alimenticios").slice(0, 5),
+    ...getProductsByCategory("Material Educativo").slice(0, 4),
+    ...getProductsByCategory("Snacks Nutritivos").slice(0, 5),
+    ...getProductsByCategory("Cuidado Personal").slice(0, 3),
   ]
 }

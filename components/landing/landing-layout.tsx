@@ -9,6 +9,7 @@ import Footer from "./landing-footer"
 import ScrollProgress from "./scroll-progress"
 import FloatingElements from "./floating-elements"
 import CatalogSection from "./catalog-section"
+import PromotionalBannerSection from "./promotional-banner-section" 
 
 export default function LandingLayout() {
   return (
@@ -21,6 +22,7 @@ export default function LandingLayout() {
         <MissionSection />
         <VisionSection />
         <ValuesSection />
+        <PromotionalBannerSection /> 
         <CatalogSection />
       </main>
 
