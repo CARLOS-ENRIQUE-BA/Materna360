@@ -27,14 +27,17 @@ const plans = [
     highlight: true,
   },
   {
-    name: "Premium Familiar",
-    price: "19.99",
+    name: "Premium Plus Anual",
+    price: "130.99",
     features: [
       "Todo lo del Plus",
-      "Caja mensual sorpresa mamá y bebé",
-      "Garantía extendida en productos",
+      "Productos exclusivos (ediciones limitadas)",
+      "Envío gratis en compras mayores a $50",
+      "Soporte prioritario",
+      "Ahorra 16% pagando anual",
     ],
     highlight: false,
+    discount: "16% de descuento anual"
   },
 ]
 
