@@ -14,10 +14,11 @@ import { FavoritesProvider } from "./favorites-context"
 import FavoritesView from "./favorites-view"
 import CatalogView from "./catalog-view"
 import { useAuth } from "@/contexts/auth-context"
+import PlansSection from "./plans-section" // Importar la nueva sección
 
 export default function TiendaLayout() {
   const [currentView, setCurrentView] = useState<
-    "tienda" | "ofertas" | "category" | "cart" | "checkout" | "favorites" | "catalog"
+    "tienda" | "ofertas" | "category" | "cart" | "checkout" | "favorites" | "catalog" | "plans" // Añadir "plans"
   >("tienda")
   const [selectedCategory, setSelectedCategory] = useState<string>("")
   const { isAuthenticated, isLoading } = useAuth()
@@ -66,6 +67,7 @@ export default function TiendaLayout() {
             {currentView === "checkout" && <Checkout setCurrentView={setCurrentView} />}
             {currentView === "favorites" && <FavoritesView setCurrentView={setCurrentView} />}
             {currentView === "catalog" && <CatalogView setCurrentView={setCurrentView} />}
+            {currentView === "plans" && <PlansSection setCurrentView={setCurrentView} />} // Renderizar la nueva sección
           </main>
 
           <Footer />

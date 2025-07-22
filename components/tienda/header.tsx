@@ -12,8 +12,8 @@ import { useRouter } from "next/navigation"
 import Logo from "../../assets/Logo-M360.png"
 
 interface HeaderProps {
-  currentView: "tienda" | "ofertas" | "category" | "cart" | "checkout" | "favorites" | "catalog"
-  setCurrentView: (view: "tienda" | "ofertas" | "category" | "cart" | "checkout" | "favorites" | "catalog") => void
+  currentView: "tienda" | "ofertas" | "category" | "cart" | "checkout" | "favorites" | "catalog" | "plans"
+  setCurrentView: (view: "tienda" | "ofertas" | "category" | "cart" | "checkout" | "favorites" | "catalog" | "plans") => void
   onCategorySelect: (category: string) => void
 }
 
@@ -209,6 +209,19 @@ export default function Header({ currentView, setCurrentView, onCategorySelect }
                 }`}
               >
                 Ofertas
+              </Button>
+
+              {/* Plans Button */}
+              <Button
+                variant="ghost"
+                onClick={() => setCurrentView("plans")}
+                className={`text-sm font-medium transition-colors duration-200 ${
+                  currentView === "plans"
+                    ? "text-[#790B5A] border-b-2 border-[#C15DA4]"
+                    : "text-[#62615F] hover:text-[#790B5A]"
+                }`}
+              >
+                Planes
               </Button>
             </div>
           </nav>
