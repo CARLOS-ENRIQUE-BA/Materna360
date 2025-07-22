@@ -67,7 +67,7 @@ export default function TiendaLayout() {
             {currentView === "checkout" && <Checkout setCurrentView={setCurrentView} />}
             {currentView === "favorites" && <FavoritesView setCurrentView={setCurrentView} />}
             {currentView === "catalog" && <CatalogView setCurrentView={setCurrentView} />}
-            {currentView === "plans" && <PlansSection setCurrentView={setCurrentView} />} // Renderizar la nueva sección
+            {currentView === "plans" && <PlansSection setCurrentView={setCurrentView} />} 
           </main>
 
           <Footer />
