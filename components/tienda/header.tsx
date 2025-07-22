@@ -10,6 +10,7 @@ import { useFavorites } from "./favorites-context"
 import { useAuth } from "@/contexts/auth-context"
 import { useRouter } from "next/navigation"
 import Logo from "../../assets/Logo-M360.png"
+import PlanModal from "./plan-modal"
 
 interface HeaderProps {
   currentView: "tienda" | "ofertas" | "category" | "cart" | "checkout" | "favorites" | "catalog" | "plans"
@@ -21,6 +22,7 @@ export default function Header({ currentView, setCurrentView, onCategorySelect }
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false)
   const [showUserMenu, setShowUserMenu] = useState(false)
+  const [showPlanModal, setShowPlanModal] = useState(false)
   const { getTotalItems } = useCart()
   const { getTotalFavorites } = useFavorites()
   const { user, logout } = useAuth()
@@ -131,10 +133,11 @@ export default function Header({ currentView, setCurrentView, onCategorySelect }
                       <div className="space-y-2">
                         <Button
                           variant="ghost"
+                          onClick={() => setShowPlanModal(true)}
                           className="w-full justify-start text-[#62615F] hover:text-[#790B5A] hover:bg-[#FAF8F5]"
                         >
                           <User className="w-4 h-4 mr-3" />
-                          Mi Perfil
+                          Mi Plan
                         </Button>
 
                         <Button
@@ -221,7 +224,7 @@ export default function Header({ currentView, setCurrentView, onCategorySelect }
                     : "text-[#62615F] hover:text-[#790B5A]"
                 }`}
               >
-                Planes
+                Paquetes
               </Button>
             </div>
           </nav>
@@ -237,6 +240,9 @@ export default function Header({ currentView, setCurrentView, onCategorySelect }
         onClose={() => setIsCategoryModalOpen(false)}
         onCategorySelect={handleCategorySelect}
       />
+
+      {/* Modal de Plan */}
+      <PlanModal isOpen={showPlanModal} onClose={() => setShowPlanModal(false)} user={user} setCurrentView={setCurrentView} />
     </>
   )
 }
