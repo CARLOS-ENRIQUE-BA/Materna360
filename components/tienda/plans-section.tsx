@@ -13,7 +13,6 @@ const plans = [
     billingType: "mensual",
     features: [
       "Acceso anticipado a ofertas",
-      "Descuentos exclusivos",
       "Envíos rápidos",
     ],
     highlight: false,
@@ -25,7 +24,6 @@ const plans = [
     features: [
       "Todo lo del Básico",
       "Productos exclusivos (ediciones limitadas)",
-      "Envío gratis en compras mayores a $50",
       "Soporte prioritario",
     ],
     highlight: true,
@@ -37,7 +35,6 @@ const plans = [
     features: [
       "Todo lo del Plus",
       "Productos exclusivos (ediciones limitadas)",
-      "Envío gratis en compras mayores a $50",
       "Soporte prioritario",
       "Ahorra 16% pagando anual",
     ],
