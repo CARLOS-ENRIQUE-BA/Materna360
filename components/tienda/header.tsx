@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, forwardRef, useImperativeHandle } from "react"
-import { ShoppingCart, Heart, Baby, User, Menu, X, LogOut } from "lucide-react"
+import { ShoppingCart, Heart, Baby, User, Menu, X, LogOut, BookOpen } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useCart } from "./cart-context"
 import CategoryModal from "./category-modal"
@@ -13,8 +13,8 @@ import Logo from "../../assets/Logo-M360.png"
 import PlanModal from "./plan-modal"
 
 interface HeaderProps {
-  currentView: "tienda" | "ofertas" | "category" | "cart" | "checkout" | "favorites" | "catalog" | "plans"
-  setCurrentView: (view: "tienda" | "ofertas" | "category" | "cart" | "checkout" | "favorites" | "catalog" | "plans") => void
+  currentView: "tienda" | "ofertas" | "category" | "cart" | "checkout" | "favorites" | "catalog" | "plans" | "books"
+  setCurrentView: (view: "tienda" | "ofertas" | "category" | "cart" | "checkout" | "favorites" | "catalog" | "plans" | "books") => void
   onCategorySelect: (category: string) => void
 }
 
@@ -217,7 +217,6 @@ const Header = forwardRef<HeaderRef, HeaderProps>(({ currentView, setCurrentView
                 Tienda
               </Button>
 
-
               {/* Catalog Button */}
               <Button
                 variant="ghost"
@@ -254,6 +253,19 @@ const Header = forwardRef<HeaderRef, HeaderProps>(({ currentView, setCurrentView
                 }`}
               >
                 Paquetes
+              </Button>
+
+              {/* Books Button */}
+              <Button
+                variant="ghost"
+                onClick={() => setCurrentView("books")}
+                className={`text-sm font-medium transition-colors duration-200 ${
+                  currentView === "books"
+                    ? "text-[#790B5A] border-b-2 border-[#C15DA4]"
+                    : "text-[#62615F] hover:text-[#790B5A]"
+                }`}
+              >
+                Libros
               </Button>
             </div>
           </nav>

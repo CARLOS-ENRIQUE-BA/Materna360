@@ -32,6 +32,18 @@ export default function Checkout({ setCurrentView }: CheckoutProps) {
       setTimeout(() => {
         setIsProcessing(false)
         setStep("success")
+
+        // Descargar automáticamente los libros comprados
+        const booksInCart = cart.filter((item) => item.category === "Libros")
+        if (booksInCart.length > 0) {
+          booksInCart.forEach((book) => {
+            const link = document.createElement("a")
+            link.href = `/downloads/${book.id}.pdf` // Ruta simulada para la descarga
+            link.download = `${book.name}.pdf`
+            link.click()
+          })
+        }
+
         clearCart()
       }, 3000)
     }

@@ -15,11 +15,12 @@ import FavoritesView from "./favorites-view"
 import CatalogView from "./catalog-view"
 import { useAuth } from "@/contexts/auth-context"
 import PlansSection from "./plans-section"
+import BooksView from "./books-view" // Importar el nuevo componente
 
 export default function TiendaLayout() {
   const [currentView, setCurrentView] = useState<
-    "tienda" | "ofertas" | "category" | "cart" | "checkout" | "favorites" | "catalog" | "plans"
-  >("tienda")
+    "tienda" | "ofertas" | "category" | "cart" | "checkout" | "favorites" | "catalog" | "plans" | "books"
+  >("tienda") // Agregar "books" como opción válida
   const [selectedCategory, setSelectedCategory] = useState<string>("")
   const [userPlan, setUserPlan] = useState({
     currentPlan: "Paquete Gratuito",
@@ -90,6 +91,7 @@ export default function TiendaLayout() {
             {currentView === "favorites" && <FavoritesView setCurrentView={setCurrentView} />}
             {currentView === "catalog" && <CatalogView setCurrentView={setCurrentView} userPlan={userPlan} />}
             {currentView === "plans" && <PlansSection setCurrentView={setCurrentView} onUserPlanUpdate={handleUserPlanUpdate} />}
+            {currentView === "books" && <BooksView setCurrentView={setCurrentView} />} {/* Nueva sección */}
           </main>
 
           <Footer />
