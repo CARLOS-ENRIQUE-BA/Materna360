@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { useState } from "react"
-import { Heart, ShoppingCart, Package, Filter, Grid, List, Search } from "lucide-react"
+import { Heart, ShoppingCart, Package, Filter, Grid, List, Search, Crown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
@@ -14,9 +14,14 @@ import ProductModal from "@/components/landing/product-modal" // Import ProductM
 
 interface CatalogViewProps {
   setCurrentView: (view: "tienda" | "ofertas" | "category" | "cart" | "checkout" | "favorites" | "catalog") => void
+  userPlan?: {
+    currentPlan: string
+    billingType: "mensual" | "anual" | null
+    nextBillingDate: string | null
+  }
 }
 
-export default function CatalogView({ setCurrentView }: CatalogViewProps) {
+export default function CatalogView({ setCurrentView, userPlan }: CatalogViewProps) {
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedCategory, setSelectedCategory] = useState<string>("all")
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
@@ -29,11 +34,22 @@ export default function CatalogView({ setCurrentView }: CatalogViewProps) {
   const { addToCart } = useCart()
   const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites()
 
-  // Obtener categorías únicas
-  const categories = ["all", ...getCategories()]
+  // Determinar si el usuario es premium
+  const isPremium = userPlan ? userPlan.currentPlan !== "Paquete Gratuito" : false
+
+  // Filtrar productos según el estado premium del usuario
+  const availableProducts = allProducts.filter(product => {
+    if (product.exclusive && !isPremium) {
+      return false // Los usuarios gratuitos no ven productos exclusivos
+    }
+    return true
+  })
+
+  // Obtener categorías únicas de productos disponibles
+  const categories = ["all", ...Array.from(new Set(availableProducts.map(p => p.category)))]
 
   // Filtrar y ordenar productos
-  const filteredProducts = allProducts
+  const filteredProducts = availableProducts
     .filter((product) => {
       const matchesSearch =
         product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -90,10 +106,21 @@ export default function CatalogView({ setCurrentView }: CatalogViewProps) {
             <h1 className="text-4xl font-bold">Catálogo Completo</h1>
           </div>
           <p className="text-xl opacity-90 mb-6">
-            Explora todos nuestros {allProducts.length} productos disponibles para mamá y bebé
+            Explora todos nuestros {availableProducts.length} productos disponibles para mamá y bebé
+            {!isPremium && (
+              <span className="block text-sm mt-2 opacity-75">
+                ¡Suscríbete para acceder a productos exclusivos premium!
+              </span>
+            )}
           </p>
           <div className="flex items-center justify-center space-x-2 text-lg">
             <Badge className="bg-white/20 text-white px-4 py-2">{filteredProducts.length} productos mostrados</Badge>
+            {isPremium && (
+              <Badge className="bg-yellow-500/20 text-white px-4 py-2 flex items-center">
+                <Crown className="w-4 h-4 mr-1" />
+                Acceso Premium
+              </Badge>
+            )}
           </div>
         </div>
       </section>
@@ -220,7 +247,9 @@ export default function CatalogView({ setCurrentView }: CatalogViewProps) {
                     viewMode === "grid"
                       ? "bg-white rounded-2xl p-4 shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 border border-[#F6DCD0]"
                       : "bg-white rounded-2xl p-4 shadow-md hover:shadow-lg transition-all duration-300 border border-[#F6DCD0] flex items-center space-x-4"
-                  } animate-in slide-in-from-bottom duration-500`}
+                  } animate-in slide-in-from-bottom duration-500 ${
+                    product.exclusive ? "ring-2 ring-yellow-400 ring-opacity-50" : ""
+                  }`}
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
                   {viewMode === "grid" ? (
@@ -234,6 +263,12 @@ export default function CatalogView({ setCurrentView }: CatalogViewProps) {
                         />
                         {product.featured && (
                           <Badge className="absolute top-2 left-2 bg-[#C15DA4] text-white">Destacado</Badge>
+                        )}
+                        {product.exclusive && (
+                          <Badge className="absolute top-2 left-2 bg-gradient-to-r from-yellow-400 to-yellow-600 text-white flex items-center">
+                            <Crown className="w-3 h-3 mr-1" />
+                            Premium
+                          </Badge>
                         )}
                         <Button
                           variant="ghost"
@@ -249,9 +284,17 @@ export default function CatalogView({ setCurrentView }: CatalogViewProps) {
                         </Button>
                       </div>
 
-                      <Badge variant="secondary" className="mb-2 bg-[#F6DCD0] text-[#790B5A]">
-                        {product.category}
-                      </Badge>
+                      <div className="flex items-center justify-between mb-2">
+                        <Badge variant="secondary" className="bg-[#F6DCD0] text-[#790B5A]">
+                          {product.category}
+                        </Badge>
+                        {product.exclusive && (
+                          <Badge className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-white text-xs flex items-center">
+                            <Crown className="w-3 h-3 mr-1" />
+                            Exclusivo
+                          </Badge>
+                        )}
+                      </div>
 
                       <h3 className="font-semibold text-[#790B5A] mb-2 line-clamp-2">{product.name}</h3>
                       <p className="text-sm text-[#62615F] mb-4 line-clamp-2">{product.description}</p>
@@ -268,7 +311,7 @@ export default function CatalogView({ setCurrentView }: CatalogViewProps) {
                       </div>
                     </>
                   ) : (
-                    // Vista Lista
+                    // Vista Lista con distintivo premium
                     <>
                       <div className="relative flex-shrink-0 cursor-pointer" onClick={() => openProductModal(product)}>
                         <img
@@ -276,6 +319,11 @@ export default function CatalogView({ setCurrentView }: CatalogViewProps) {
                           alt={product.name}
                           className="w-24 h-24 object-cover rounded-xl"
                         />
+                        {product.exclusive && (
+                          <Badge className="absolute -top-1 -left-1 bg-gradient-to-r from-yellow-400 to-yellow-600 text-white text-xs flex items-center">
+                            <Crown className="w-3 h-3 mr-1" />
+                          </Badge>
+                        )}
                         <Button
                           variant="ghost"
                           size="sm"
@@ -293,7 +341,15 @@ export default function CatalogView({ setCurrentView }: CatalogViewProps) {
                       <div className="flex-1 min-w-0">
                         <div className="flex items-start justify-between mb-2">
                           <div>
-                            <h3 className="font-semibold text-[#790B5A] mb-1">{product.name}</h3>
+                            <div className="flex items-center space-x-2 mb-1">
+                              <h3 className="font-semibold text-[#790B5A]">{product.name}</h3>
+                              {product.exclusive && (
+                                <Badge className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-white text-xs flex items-center">
+                                  <Crown className="w-3 h-3 mr-1" />
+                                  Premium
+                                </Badge>
+                              )}
+                            </div>
                             <Badge variant="secondary" className="bg-[#F6DCD0] text-[#790B5A] text-xs">
                               {product.category}
                             </Badge>

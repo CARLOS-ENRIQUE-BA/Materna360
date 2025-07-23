@@ -21,6 +21,11 @@ export default function TiendaLayout() {
     "tienda" | "ofertas" | "category" | "cart" | "checkout" | "favorites" | "catalog" | "plans"
   >("tienda")
   const [selectedCategory, setSelectedCategory] = useState<string>("")
+  const [userPlan, setUserPlan] = useState({
+    currentPlan: "Paquete Gratuito",
+    billingType: null as "mensual" | "anual" | null,
+    nextBillingDate: null as string | null
+  })
   const { isAuthenticated, isLoading } = useAuth()
   const router = useRouter()
   const headerRef = useRef<{ updateUserPlan: (planName: string, billingType: "mensual" | "anual", nextBillingDate: string) => void }>(null)
@@ -55,6 +60,11 @@ export default function TiendaLayout() {
   }
 
   const handleUserPlanUpdate = (planName: string, billingType: "mensual" | "anual", nextBillingDate: string) => {
+    setUserPlan({
+      currentPlan: planName,
+      billingType: billingType,
+      nextBillingDate: nextBillingDate
+    })
     if (headerRef.current) {
       headerRef.current.updateUserPlan(planName, billingType, nextBillingDate)
     }
@@ -72,13 +82,13 @@ export default function TiendaLayout() {
           />
 
           <main className="container mx-auto px-4 py-8">
-            {currentView === "tienda" && <ProductGrid setCurrentView={setCurrentView} />}
+            {currentView === "tienda" && <ProductGrid setCurrentView={setCurrentView} userPlan={userPlan} />}
             {currentView === "ofertas" && <OfertasSection setCurrentView={setCurrentView} />}
             {currentView === "category" && <CategoryView category={selectedCategory} setCurrentView={setCurrentView} />}
             {currentView === "cart" && <Cart setCurrentView={setCurrentView} />}
             {currentView === "checkout" && <Checkout setCurrentView={setCurrentView} />}
             {currentView === "favorites" && <FavoritesView setCurrentView={setCurrentView} />}
-            {currentView === "catalog" && <CatalogView setCurrentView={setCurrentView} />}
+            {currentView === "catalog" && <CatalogView setCurrentView={setCurrentView} userPlan={userPlan} />}
             {currentView === "plans" && <PlansSection setCurrentView={setCurrentView} onUserPlanUpdate={handleUserPlanUpdate} />}
           </main>
 

@@ -1,24 +1,31 @@
 "use client"
 
 import { useState } from "react"
-import { Heart, ShoppingCart, Star, TrendingUp } from "lucide-react"
+import { Heart, ShoppingCart, Star, TrendingUp, Crown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { useCart, type Product } from "./cart-context"
 import { useFavorites } from "./favorites-context"
-import { getFeaturedProducts, getBestSellers } from "@/data/products"
+import { getFeaturedProducts, getBestSellers, getAvailableProducts } from "@/data/products"
 import ProductModal from "@/components/landing/product-modal"
 
 interface ProductGridProps {
   setCurrentView: (view: "tienda" | "ofertas" | "categorias" | "cart" | "checkout") => void
+  userPlan: {
+    currentPlan: string
+    billingType: "mensual" | "anual" | null
+    nextBillingDate: string | null
+  }
 }
 
-export default function ProductGrid({ setCurrentView }: ProductGridProps) {
+export default function ProductGrid({ setCurrentView, userPlan }: ProductGridProps) {
   const { addToCart } = useCart()
   const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites()
 
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const isPremium = userPlan.currentPlan !== "Paquete Gratuito"
 
   const toggleFavorite = (product: Product) => {
     if (isFavorite(product.id)) {
@@ -33,7 +40,6 @@ export default function ProductGrid({ setCurrentView }: ProductGridProps) {
   }
 
   const handleImageClick = (product: Product) => {
-    // Renamed to clarify it's for image click
     setSelectedProduct(product)
     setIsModalOpen(true)
   }
@@ -42,6 +48,12 @@ export default function ProductGrid({ setCurrentView }: ProductGridProps) {
     setIsModalOpen(false)
     setSelectedProduct(null)
   }
+
+  // Filtrar productos según el estado premium del usuario
+  const availableFeaturedProducts = getAvailableProducts(isPremium).filter(product => product.featured === true)
+  const availableBestSellers = getAvailableProducts(isPremium).filter(product => 
+    [11, 12, 13].includes(product.id) // IDs de los productos más vendidos
+  )
 
   return (
     <div className="space-y-8">
@@ -79,27 +91,31 @@ export default function ProductGrid({ setCurrentView }: ProductGridProps) {
             <Badge className="bg-[#97C4C6] text-white">Destacados</Badge>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {getFeaturedProducts().map((product) => (
+            {availableFeaturedProducts.map((product) => (
               <div
                 key={product.id}
                 className="bg-white rounded-2xl p-4 shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 border border-[#F6DCD0]"
               >
                 <div className="relative mb-4 cursor-pointer" onClick={() => handleImageClick(product)}>
-                  {" "}
-                  {/* Only image click opens modal */}
                   <img
                     src={product.image || "/placeholder.svg"}
                     alt={product.name}
                     className="w-full h-48 object-cover rounded-xl"
                   />
                   <Badge className="absolute top-2 left-2 bg-[#C15DA4] text-white">Destacado</Badge>
+                  {product.exclusive && (
+                    <Badge className="absolute top-2 left-20 bg-gradient-to-r from-yellow-400 to-yellow-600 text-white flex items-center gap-1">
+                      <Crown className="w-3 h-3" />
+                      Premium
+                    </Badge>
+                  )}
                   <Button
                     variant="ghost"
                     size="sm"
                     onClick={(e) => {
                       e.stopPropagation()
                       toggleFavorite(product)
-                    }} // Stop propagation for favorite button
+                    }}
                     className="absolute top-2 right-2 bg-white/80 hover:bg-white"
                   >
                     <Heart
@@ -120,7 +136,7 @@ export default function ProductGrid({ setCurrentView }: ProductGridProps) {
                     onClick={(e) => {
                       e.stopPropagation()
                       handleAddToCart(product)
-                    }} // Stop propagation for add to cart button
+                    }}
                     className="bg-gradient-to-r from-[#790B5A] to-[#C15DA4] hover:from-[#C15DA4] hover:to-[#790B5A] text-white rounded-xl transition-all duration-300"
                   >
                     <ShoppingCart className="w-4 h-4 mr-2" />
@@ -144,27 +160,31 @@ export default function ProductGrid({ setCurrentView }: ProductGridProps) {
             <Badge className="bg-[#97C4C6] text-white">Populares</Badge>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {getBestSellers().map((product) => (
+            {availableBestSellers.map((product) => (
               <div
                 key={product.id}
                 className="bg-white rounded-2xl p-4 shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 border border-[#F6DCD0]"
               >
                 <div className="relative mb-4 cursor-pointer" onClick={() => handleImageClick(product)}>
-                  {" "}
-                  {/* Only image click opens modal */}
                   <img
                     src={product.image || "/placeholder.svg"}
                     alt={product.name}
                     className="w-full h-48 object-cover rounded-xl"
                   />
                   <Badge className="absolute top-2 left-2 bg-[#97C4C6] text-white">Más Vendido</Badge>
+                  {product.exclusive && (
+                    <Badge className="absolute top-2 left-24 bg-gradient-to-r from-yellow-400 to-yellow-600 text-white flex items-center gap-1">
+                      <Crown className="w-3 h-3" />
+                      Premium
+                    </Badge>
+                  )}
                   <Button
                     variant="ghost"
                     size="sm"
                     onClick={(e) => {
                       e.stopPropagation()
                       toggleFavorite(product)
-                    }} // Stop propagation for favorite button
+                    }}
                     className="absolute top-2 right-2 bg-white/80 hover:bg-white"
                   >
                     <Heart
@@ -185,7 +205,7 @@ export default function ProductGrid({ setCurrentView }: ProductGridProps) {
                     onClick={(e) => {
                       e.stopPropagation()
                       handleAddToCart(product)
-                    }} // Stop propagation for add to cart button
+                    }}
                     className="bg-gradient-to-r from-[#790B5A] to-[#C15DA4] hover:from-[#C15DA4] hover:to-[#790B5A] text-white rounded-xl transition-all duration-300"
                   >
                     <ShoppingCart className="w-4 h-4 mr-2" />

@@ -325,7 +325,7 @@ export const allProducts: Product[] = [
     category: "Cuidado Personal Premium",
     description: "Kit exclusivo con cremas antiestrías de lujo, aceites esenciales importados, masajeador facial y guía personalizada de cuidado. Solo disponible para miembros premium.",
     exclusive: true,
-    featured: true,
+    featured: false,
   },
   {
     id: 402,
@@ -353,7 +353,7 @@ export const allProducts: Product[] = [
     category: "Lactancia Premium",
     description: "Extractor de leche hospitalario, almohadas ergonómicas premium, sujetadores de lactancia de diseñador y consultoría personalizada con especialista en lactancia.",
     exclusive: true,
-    featured: true,
+    featured: false,
   },
   {
     id: 405,
