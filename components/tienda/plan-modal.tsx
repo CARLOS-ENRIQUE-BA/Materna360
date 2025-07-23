@@ -4,12 +4,18 @@ import { Button } from "@/components/ui/button"
 interface PlanModalProps {
   isOpen: boolean
   onClose: () => void
-  user: any // Simulación, idealmente tipar según tu modelo de usuario
+  user: {
+    currentPlan: string
+    billingType: "mensual" | "anual" | null
+    nextBillingDate: string | null
+  }
   setCurrentView: (view: string) => void
 }
 
 export default function PlanModal({ isOpen, onClose, user, setCurrentView }: PlanModalProps) {
   if (!isOpen) return null
+
+  const isPremium = user.currentPlan !== "Paquete Gratuito"
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
@@ -29,12 +35,23 @@ export default function PlanModal({ isOpen, onClose, user, setCurrentView }: Pla
           <h2 className="text-2xl font-bold text-[#790B5A] mb-2">Tu Plan Actual</h2>
           <div className="mb-4">
             <span className="inline-block bg-[#F6DCD0] text-[#790B5A] px-4 py-2 rounded-xl font-semibold text-lg">
-              Paquete Gratuito
+              {user.currentPlan}
             </span>
           </div>
-          <p className="text-[#62615F] mb-6">
-            ¿Quieres más beneficios? Descubre nuestras suscripciones premium en el apartado de <b>Paquetes</b> de la tienda y accede a ofertas, productos exclusivos y mucho más.
-          </p>
+          {isPremium ? (
+            <>
+              <p className="text-[#62615F] mb-2">
+                Tipo de facturación: <b>{user.billingType || "No disponible"}</b>
+              </p>
+              <p className="text-[#62615F] mb-6">
+                Próxima facturación: <b>{user.nextBillingDate || "No disponible"}</b>
+              </p>
+            </>
+          ) : (
+            <p className="text-[#62615F] mb-6">
+              ¿Quieres más beneficios? Descubre nuestras suscripciones premium en el apartado de <b>Paquetes</b> de la tienda y accede a ofertas, productos exclusivos y mucho más.
+            </p>
+          )}
           <Button
             onClick={() => {
               onClose()
@@ -42,10 +59,10 @@ export default function PlanModal({ isOpen, onClose, user, setCurrentView }: Pla
             }}
             className="bg-gradient-to-r from-[#790B5A] to-[#C15DA4] text-white rounded-xl px-6 py-3 font-semibold"
           >
-            Ver Planes
+            {isPremium ? "Cambiar Plan" : "Ver Planes"}
           </Button>
         </div>
       </div>
     </div>
   )
-} 
+}

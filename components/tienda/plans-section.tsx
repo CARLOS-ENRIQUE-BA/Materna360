@@ -1,13 +1,16 @@
 "use client"
 
+import { useState } from "react"
 import { Check, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import AnimatedSection from "@/components/landing/animated-section"
+import SubscriptionCheckoutModal from "./subscription-checkout-modal"
 
 const plans = [
   {
     name: "Premium Básico",
     price: "7.99",
+    billingType: "mensual",
     features: [
       "Acceso anticipado a ofertas",
       "Descuentos exclusivos",
@@ -18,6 +21,7 @@ const plans = [
   {
     name: "Premium Plus",
     price: "12.99",
+    billingType: "mensual",
     features: [
       "Todo lo del Básico",
       "Productos exclusivos (ediciones limitadas)",
@@ -29,6 +33,7 @@ const plans = [
   {
     name: "Premium Plus Anual",
     price: "130.99",
+    billingType: "anual",
     features: [
       "Todo lo del Plus",
       "Productos exclusivos (ediciones limitadas)",
@@ -42,6 +47,24 @@ const plans = [
 ]
 
 export default function PlansSection({ setCurrentView }) {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedPlan, setSelectedPlan] = useState(null)
+
+  const handleSubscribeClick = (plan) => {
+    setSelectedPlan(plan)
+    setIsModalOpen(true)
+  }
+
+  const handleModalClose = () => {
+    setIsModalOpen(false)
+    setSelectedPlan(null)
+  }
+
+  const handleSubscribe = (planName, billingType, nextBillingDate) => {
+    console.log(`Suscripción confirmada: ${planName}, ${billingType}, próxima facturación: ${nextBillingDate}`)
+    // Aquí puedes agregar lógica adicional, como redirigir al usuario o mostrar un mensaje de éxito.
+  }
+
   return (
     <AnimatedSection animation="fade-up">
       <div className="bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl p-8 border border-[#F6DCD0]">
@@ -83,7 +106,7 @@ export default function PlansSection({ setCurrentView }) {
                 ))}
               </ul>
               <Button
-                onClick={() => alert("Redirigiendo a la pasarela de pago...")}
+                onClick={() => handleSubscribeClick(plan)}
                 className={`mt-8 w-full font-bold rounded-xl shadow-lg transform hover:scale-105 transition-transform ${
                   plan.highlight
                     ? "bg-white text-[#790B5A] hover:bg-gray-100"
@@ -96,6 +119,14 @@ export default function PlansSection({ setCurrentView }) {
           ))}
         </div>
       </div>
+
+      {/* Modal */}
+      <SubscriptionCheckoutModal
+        isOpen={isModalOpen}
+        onClose={handleModalClose}
+        plan={selectedPlan}
+        onSubscribe={handleSubscribe}
+      />
     </AnimatedSection>
   )
-} 
+}
