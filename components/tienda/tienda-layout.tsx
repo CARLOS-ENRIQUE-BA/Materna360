@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { useRouter } from "next/navigation"
 import Header from "./header"
 import ProductGrid from "./product-grid"
@@ -14,15 +14,16 @@ import { FavoritesProvider } from "./favorites-context"
 import FavoritesView from "./favorites-view"
 import CatalogView from "./catalog-view"
 import { useAuth } from "@/contexts/auth-context"
-import PlansSection from "./plans-section" // Importar la nueva sección
+import PlansSection from "./plans-section"
 
 export default function TiendaLayout() {
   const [currentView, setCurrentView] = useState<
-    "tienda" | "ofertas" | "category" | "cart" | "checkout" | "favorites" | "catalog" | "plans" // Añadir "plans"
+    "tienda" | "ofertas" | "category" | "cart" | "checkout" | "favorites" | "catalog" | "plans"
   >("tienda")
   const [selectedCategory, setSelectedCategory] = useState<string>("")
   const { isAuthenticated, isLoading } = useAuth()
   const router = useRouter()
+  const headerRef = useRef<{ updateUserPlan: (planName: string, billingType: "mensual" | "anual", nextBillingDate: string) => void }>(null)
 
   // Proteger la ruta - redirigir si no está autenticado
   useEffect(() => {
@@ -53,11 +54,22 @@ export default function TiendaLayout() {
     setCurrentView("category")
   }
 
+  const handleUserPlanUpdate = (planName: string, billingType: "mensual" | "anual", nextBillingDate: string) => {
+    if (headerRef.current) {
+      headerRef.current.updateUserPlan(planName, billingType, nextBillingDate)
+    }
+  }
+
   return (
     <FavoritesProvider>
       <CartProvider>
         <div className="min-h-screen bg-gradient-to-br from-[#FAF8F5] via-[#F6DCD0] to-[#E985A6]">
-          <Header currentView={currentView} setCurrentView={setCurrentView} onCategorySelect={handleCategorySelect} />
+          <Header 
+            ref={headerRef}
+            currentView={currentView} 
+            setCurrentView={setCurrentView} 
+            onCategorySelect={handleCategorySelect} 
+          />
 
           <main className="container mx-auto px-4 py-8">
             {currentView === "tienda" && <ProductGrid setCurrentView={setCurrentView} />}
@@ -67,7 +79,7 @@ export default function TiendaLayout() {
             {currentView === "checkout" && <Checkout setCurrentView={setCurrentView} />}
             {currentView === "favorites" && <FavoritesView setCurrentView={setCurrentView} />}
             {currentView === "catalog" && <CatalogView setCurrentView={setCurrentView} />}
-            {currentView === "plans" && <PlansSection setCurrentView={setCurrentView} />} 
+            {currentView === "plans" && <PlansSection setCurrentView={setCurrentView} onUserPlanUpdate={handleUserPlanUpdate} />}
           </main>
 
           <Footer />

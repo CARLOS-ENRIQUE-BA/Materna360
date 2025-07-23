@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, forwardRef, useImperativeHandle } from "react"
 import { ShoppingCart, Heart, Baby, User, Menu, X, LogOut } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useCart } from "./cart-context"
@@ -18,11 +18,20 @@ interface HeaderProps {
   onCategorySelect: (category: string) => void
 }
 
-export default function Header({ currentView, setCurrentView, onCategorySelect }: HeaderProps) {
+export interface HeaderRef {
+  updateUserPlan: (planName: string, billingType: "mensual" | "anual", nextBillingDate: string) => void
+}
+
+const Header = forwardRef<HeaderRef, HeaderProps>(({ currentView, setCurrentView, onCategorySelect }, ref) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false)
   const [showUserMenu, setShowUserMenu] = useState(false)
   const [showPlanModal, setShowPlanModal] = useState(false)
+  const [userPlan, setUserPlan] = useState({
+    currentPlan: "Paquete Gratuito",
+    billingType: null as "mensual" | "anual" | null,
+    nextBillingDate: null as string | null
+  })
   const { getTotalItems } = useCart()
   const { getTotalFavorites } = useFavorites()
   const { user, logout } = useAuth()
@@ -39,8 +48,28 @@ export default function Header({ currentView, setCurrentView, onCategorySelect }
 
   const handleLogout = () => {
     logout()
+    // Resetear plan al cerrar sesión
+    setUserPlan({
+      currentPlan: "Paquete Gratuito",
+      billingType: null,
+      nextBillingDate: null
+    })
     router.push("/")
   }
+
+  // Función para actualizar el plan del usuario
+  const updateUserPlan = (planName: string, billingType: "mensual" | "anual", nextBillingDate: string) => {
+    setUserPlan({
+      currentPlan: planName,
+      billingType: billingType,
+      nextBillingDate: nextBillingDate
+    })
+  }
+
+  // Exponer la función updateUserPlan a través de ref
+  useImperativeHandle(ref, () => ({
+    updateUserPlan
+  }))
 
   return (
     <>
@@ -242,7 +271,16 @@ export default function Header({ currentView, setCurrentView, onCategorySelect }
       />
 
       {/* Modal de Plan */}
-      <PlanModal isOpen={showPlanModal} onClose={() => setShowPlanModal(false)} user={user} setCurrentView={setCurrentView} />
+      <PlanModal 
+        isOpen={showPlanModal} 
+        onClose={() => setShowPlanModal(false)} 
+        user={userPlan} 
+        setCurrentView={setCurrentView} 
+      />
     </>
   )
-}
+})
+
+Header.displayName = "Header"
+
+export default Header

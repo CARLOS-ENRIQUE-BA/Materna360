@@ -9,7 +9,7 @@ interface PlanModalProps {
     billingType: "mensual" | "anual" | null
     nextBillingDate: string | null
   }
-  setCurrentView: (view: string) => void
+  setCurrentView: (view: "plans" | "tienda" | "ofertas" | "category" | "cart" | "checkout" | "favorites" | "catalog") => void
 }
 
 export default function PlanModal({ isOpen, onClose, user, setCurrentView }: PlanModalProps) {

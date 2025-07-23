@@ -46,7 +46,12 @@ const plans = [
   },
 ]
 
-export default function PlansSection({ setCurrentView }) {
+interface PlansSectionProps {
+  setCurrentView: (view: string) => void
+  onUserPlanUpdate?: (planName: string, billingType: "mensual" | "anual", nextBillingDate: string) => void
+}
+
+export default function PlansSection({ setCurrentView, onUserPlanUpdate }: PlansSectionProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedPlan, setSelectedPlan] = useState(null)
 
@@ -62,7 +67,16 @@ export default function PlansSection({ setCurrentView }) {
 
   const handleSubscribe = (planName, billingType, nextBillingDate) => {
     console.log(`Suscripción confirmada: ${planName}, ${billingType}, próxima facturación: ${nextBillingDate}`)
-    // Aquí puedes agregar lógica adicional, como redirigir al usuario o mostrar un mensaje de éxito.
+    
+    // Actualizar el plan del usuario en el header
+    if (onUserPlanUpdate) {
+      onUserPlanUpdate(planName, billingType, nextBillingDate)
+    }
+    
+    // Redirigir a la tienda después de la compra
+    setTimeout(() => {
+      setCurrentView("tienda")
+    }, 1000)
   }
 
   return (

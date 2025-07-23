@@ -315,6 +315,64 @@ export const allProducts: Product[] = [
     category: "Alimentación Bebé",
     description: "Set completo de biberones con sistema anticólicos. Incluye tetinas de diferentes flujos.",
   },
+
+  // PRODUCTOS EXCLUSIVOS PARA USUARIOS PREMIUM
+  {
+    id: 401,
+    name: "Kit Premium de Cuidado Maternal Deluxe",
+    price: 189.99,
+    image: "/Productos-exclusivos/premium1.jpg",
+    category: "Cuidado Personal Premium",
+    description: "Kit exclusivo con cremas antiestrías de lujo, aceites esenciales importados, masajeador facial y guía personalizada de cuidado. Solo disponible para miembros premium.",
+    exclusive: true,
+    featured: true,
+  },
+  {
+    id: 402,
+    name: "Plan Nutricional VIP con Chef Personal",
+    price: 299.99,
+    image: "/Productos-exclusivos/premium2.jpg",
+    category: "Planes Alimenticios Premium",
+    description: "Plan alimenticio personalizado con consultas semanales con chef especializado en nutrición maternal, recetas gourmet y ingredientes premium incluidos.",
+    exclusive: true,
+  },
+  {
+    id: 403,
+    name: "Ropa de Maternidad Diseñador Exclusiva",
+    price: 249.99,
+    image: "/Productos-exclusivos/premium3.jpg",
+    category: "Ropa Materna Premium",
+    description: "Colección exclusiva de vestidos y conjuntos de maternidad diseñados por reconocidos diseñadores. Materiales de lujo y cortes únicos para ocasiones especiales.",
+    exclusive: true,
+  },
+  {
+    id: 404,
+    name: "Set de Lactancia Profesional Avanzado",
+    price: 349.99,
+    image: "/Productos-exclusivos/premium4.jpg",
+    category: "Lactancia Premium",
+    description: "Extractor de leche hospitalario, almohadas ergonómicas premium, sujetadores de lactancia de diseñador y consultoría personalizada con especialista en lactancia.",
+    exclusive: true,
+    featured: true,
+  },
+  {
+    id: 405,
+    name: "Accesorios de Bebé Artesanales Premium",
+    price: 159.99,
+    image: "/Productos-exclusivos/premium5.jpg",
+    category: "Accesorios Bebé Premium",
+    description: "Mantas tejidas a mano con hilos orgánicos, móviles musicales personalizados y juguetes sensoriales únicos. Cada pieza es una obra de arte funcional.",
+    exclusive: true,
+  },
+  {
+    id: 406,
+    name: "Suplementos Nutricionales de Laboratorio Exclusivo",
+    price: 129.99,
+    image: "/Productos-exclusivos/premium6.jpg",
+    category: "Snacks Nutritivos Premium",
+    description: "Suplementos formulados exclusivamente para miembros premium con ingredientes raros y de alta biodisponibilidad. Incluye vitaminas prenatales de grado farmacéutico y superalimentos.",
+    exclusive: true,
+  },
 ]
 
 // Funciones utilitarias para filtrar productos
@@ -389,4 +447,17 @@ export const getProductsForLanding = (): Product[] => {
     ...getProductsByCategory("Snacks Nutritivos").slice(0, 5),
     ...getProductsByCategory("Cuidado Personal").slice(0, 3),
   ]
+}
+
+// Nueva función para obtener productos exclusivos
+export const getExclusiveProducts = (): Product[] => {
+  return allProducts.filter((product) => product.exclusive === true)
+}
+
+// Función para filtrar productos según el estado premium del usuario
+export const getAvailableProducts = (isPremium: boolean): Product[] => {
+  if (isPremium) {
+    return allProducts // Los usuarios premium ven todos los productos
+  }
+  return allProducts.filter((product) => !product.exclusive) // Los usuarios gratuitos no ven productos exclusivos
 }

@@ -10,6 +10,7 @@ export interface Product {
   category: string
   description: string
   featured?: boolean
+  exclusive?: boolean // Nueva propiedad para productos exclusivos
 }
 
 export interface CartItem extends Product {
