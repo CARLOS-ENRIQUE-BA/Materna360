@@ -1,6 +1,6 @@
 "use client"
 
-import { Heart, Baby, Instagram, Mail, MapPin, Phone } from "lucide-react"
+import { Heart, Baby, Instagram, Mail, Phone } from "lucide-react"
 import Logo from "../../assets/Logo-M360.png"
 
 export default function LandingFooter() {
@@ -13,13 +13,13 @@ export default function LandingFooter() {
           <div className="animate-in fade-in duration-700">
             <div className="flex items-center space-x-3 mb-4">
               <div className="relative">
-              <div className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg overflow-hidden bg-white">
-                <img
-                  src={Logo.src}
-                  alt="Logo Materna 360"
-                  className="object-cover w-full h-full"
-                />
-              </div>
+                <div className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg overflow-hidden bg-white">
+                  <img
+                    src={Logo.src}
+                    alt="Logo Materna 360"
+                    className="object-cover w-full h-full"
+                  />
+                </div>
                 <div className="absolute -top-1 -right-1 w-4 h-4 bg-[#97C4C6] rounded-full animate-pulse"></div>
               </div>
               <div>
@@ -33,37 +33,8 @@ export default function LandingFooter() {
             </p>
           </div>
 
-          {/* Quick links */}
-          <div className="animate-in slide-in-from-bottom duration-700 delay-200">
-            <h4 className="text-lg font-semibold text-[#790B5A] mb-4">Enlaces Rápidos</h4>
-            <ul className="space-y-3">
-              <li>
-                <a href="/login" className="text-[#62615F] hover:text-[#790B5A] transition-colors duration-200">
-                  Iniciar Sesión
-                </a>
-              </li>
-              <li>
-                <a href="/register" className="text-[#62615F] hover:text-[#790B5A] transition-colors duration-200">
-                  Crear Cuenta
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-[#62615F] hover:text-[#790B5A] transition-colors duration-200">
-                  Sobre Nosotros
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-[#62615F] hover:text-[#790B5A] transition-colors duration-200">
-                  Servicios
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-[#62615F] hover:text-[#790B5A] transition-colors duration-200">
-                  Contacto
-                </a>
-              </li>
-            </ul>
-          </div>
+          {/* Empty space for alignment */}
+          <div className="animate-in slide-in-from-bottom duration-700 delay-200"></div>
 
           {/* Contact info */}
           <div className="animate-in slide-in-from-bottom duration-700 delay-300">

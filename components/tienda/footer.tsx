@@ -1,6 +1,6 @@
 "use client"
 
-import { Heart, Baby, Instagram, Mail, MapPin, Phone } from "lucide-react"
+import { Heart, Baby, Instagram, Mail, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Logo from "../../assets/Logo-M360.png"
 
@@ -62,44 +62,31 @@ export default function Footer() {
             <h4 className="text-lg font-semibold text-[#790B5A] mb-4">Enlaces Rápidos</h4>
             <ul className="space-y-3">
               <li>
-                <Button
-                  variant="ghost"
-                  className="p-0 h-auto text-[#62615F] hover:text-[#790B5A] transition-colors duration-200"
+                <a
+                  href="/downloads/Sobre_Nosotros.pdf" // Ruta del archivo PDF
+                  download="Sobre Nosotros.pdf" // Nombre del archivo al descargar
+                  className="text-[#62615F] hover:text-[#790B5A] transition-colors duration-200"
                 >
                   Sobre Nosotros
-                </Button>
+                </a>
               </li>
               <li>
-                <Button
-                  variant="ghost"
-                  className="p-0 h-auto text-[#62615F] hover:text-[#790B5A] transition-colors duration-200"
+                <a
+                  href="/downloads/Política_de_Privacidad.pdf" // Ruta del archivo PDF
+                  download="Política de Privacidad.pdf" // Nombre del archivo al descargar
+                  className="text-[#62615F] hover:text-[#790B5A] transition-colors duration-200"
                 >
                   Política de Privacidad
-                </Button>
+                </a>
               </li>
               <li>
-                <Button
-                  variant="ghost"
-                  className="p-0 h-auto text-[#62615F] hover:text-[#790B5A] transition-colors duration-200"
+                <a
+                  href="/downloads/terminos-y-condiciones.pdf" // Ruta del archivo PDF
+                  download="Términos y Condiciones - Materna 360.pdf" // Nombre del archivo al descargar
+                  className="text-[#62615F] hover:text-[#790B5A] transition-colors duration-200"
                 >
                   Términos y Condiciones
-                </Button>
-              </li>
-              <li>
-                <Button
-                  variant="ghost"
-                  className="p-0 h-auto text-[#62615F] hover:text-[#790B5A] transition-colors duration-200"
-                >
-                  Preguntas Frecuentes
-                </Button>
-              </li>
-              <li>
-                <Button
-                  variant="ghost"
-                  className="p-0 h-auto text-[#62615F] hover:text-[#790B5A] transition-colors duration-200"
-                >
-                  Guía de Tallas
-                </Button>
+                </a>
               </li>
             </ul>
           </div>
