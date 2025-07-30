@@ -212,19 +212,21 @@ export default function RegisterForm() {
               />
               <Label htmlFor="terms" className="text-sm text-[#62615F] cursor-pointer leading-relaxed">
                 Acepto los{" "}
-                <button
-                  type="button"
+                <a
+                  href="/downloads/Terminos_y_Condicione.pdf" // Ruta del archivo PDF
+                  download="Términos y Condiciones - Materna 360.pdf" // Nombre del archivo al descargar
                   className="text-[#C15DA4] hover:text-[#790B5A] transition-colors duration-200 hover:underline"
                 >
                   términos y condiciones
-                </button>{" "}
+                </a>{" "}
                 y la{" "}
-                <button
-                  type="button"
+                <a
+                  href="/downloads/Política_de_Privacidad.pdf" // Ruta del archivo PDF
+                  download="Política de Privacidad - Materna 360.pdf" // Nombre del archivo al descargar
                   className="text-[#C15DA4] hover:text-[#790B5A] transition-colors duration-200 hover:underline"
                 >
                   política de privacidad
-                </button>
+                </a>
               </Label>
             </div>
           </div>

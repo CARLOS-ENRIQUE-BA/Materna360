@@ -81,7 +81,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="/downloads/terminos-y-condiciones.pdf" // Ruta del archivo PDF
+                  href="/downloads/Terminos_y_Condicione.pdf" // Ruta del archivo PDF
                   download="Términos y Condiciones - Materna 360.pdf" // Nombre del archivo al descargar
                   className="text-[#62615F] hover:text-[#790B5A] transition-colors duration-200"
                 >
