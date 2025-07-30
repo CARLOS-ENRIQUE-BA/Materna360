@@ -373,54 +373,61 @@ export const allProducts: Product[] = [
     description: "Suplementos formulados exclusivamente para miembros premium con ingredientes raros y de alta biodisponibilidad. Incluye vitaminas prenatales de grado farmacéutico y superalimentos.",
     exclusive: true,
   },// Nuevos productos de la categoría "Libros"
+
   {
-    id: 501,
-    name: "Libro: La Maternidad Consciente",
-    price: 19.99,
-    image: "/Libros/img1.jpg",
-    category: "Libros",
-    description: "Una guía práctica para vivir la maternidad de manera plena y consciente.",
-  },
-  {
-    id: 502,
-    name: "Libro: Nutrición para el Embarazo",
-    price: 24.99,
-    image: "/Libros/img2.jpg",
-    category: "Libros",
-    description: "Recetas y consejos para una alimentación saludable durante el embarazo.",
-  },
-  {
-    id: 503,
-    name: "Libro: Lactancia Materna Exitosa",
-    price: 22.99,
-    image: "/Libros/img3.jpg",
-    category: "Libros",
-    description: "Técnicas y consejos para una lactancia materna exitosa y sin complicaciones.",
-  },
-  {
-    id: 504,
-    name: "Libro: Guía de Cuidados del Bebé",
-    price: 29.99,
-    image: "/Libros/img4.jpg",
-    category: "Libros",
-    description: "Todo lo que necesitas saber para cuidar a tu bebé durante el primer año.",
-  },
-  {
-    id: 505,
-    name: "Libro: Ejercicios para el Embarazo",
-    price: 18.99,
-    image: "/Libros/img5.jpg",
-    category: "Libros",
-    description: "Rutinas de ejercicios seguros y efectivos para cada etapa del embarazo.",
-  },
-  {
-    id: 506,
-    name: "Libro: Preparación para el Parto",
-    price: 25.99,
-    image: "/Libros/img6.jpg",
-    category: "Libros",
-    description: "Consejos y técnicas para prepararte física y emocionalmente para el parto.",
-  },
+  id: 501,
+  name: "Libro: La Maternidad Consciente",
+  price: 19.99,
+  image: "/Libros/img1.png",
+  category: "Libros",
+  description: "Una guía práctica para vivir la maternidad de manera plena y consciente.",
+  downloadUrl: "/downloads/maternidad-consciente.pdf", // Ruta específica para la descarga
+},
+{
+  id: 502,
+  name: "Libro: Nutrición para el Embarazo",
+  price: 24.99,
+  image: "/Libros/img2.png",
+  category: "Libros",
+  description: "Recetas y consejos para una alimentación saludable durante el embarazo.",
+  downloadUrl: "/downloads/nutricion-embarazo.pdf", // Ruta específica para la descarga
+},
+{
+  id: 503,
+  name: "Libro: Lactancia Materna Exitosa",
+  price: 22.99,
+  image: "/Libros/img3.png",
+  category: "Libros",
+  description: "Técnicas y consejos para una lactancia materna exitosa y sin complicaciones.",
+  downloadUrl: "/downloads/lactancia-exitosa.pdf", // Ruta específica para la descarga
+},
+{
+  id: 504,
+  name: "Libro: Guía de Cuidados del Bebé",
+  price: 29.99,
+  image: "/Libros/img4.png",
+  category: "Libros",
+  description: "Todo lo que necesitas saber para cuidar a tu bebé durante el primer año.",
+  downloadUrl: "/downloads/cuidados-bebe.pdf", // Ruta específica para la descarga
+},
+{
+  id: 505,
+  name: "Libro: Ejercicios para el Embarazo",
+  price: 18.99,
+  image: "/Libros/img5.png",
+  category: "Libros",
+  description: "Rutinas de ejercicios seguros y efectivos para cada etapa del embarazo.",
+  downloadUrl: "/downloads/ejercicios-embarazo.pdf", // Ruta específica para la descarga
+},
+{
+  id: 506,
+  name: "Libro: Preparación para el Parto",
+  price: 25.99,
+  image: "/Libros/img6.png",
+  category: "Libros",
+  description: "Consejos y técnicas para prepararte física y emocionalmente para el parto.",
+  downloadUrl: "/downloads/preparacion-parto.pdf", // Ruta específica para la descarga
+},
 ]
 
 // Funciones utilitarias para filtrar productos

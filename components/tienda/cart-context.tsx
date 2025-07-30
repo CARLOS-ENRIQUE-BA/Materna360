@@ -11,6 +11,7 @@ export interface Product {
   description: string
   featured?: boolean
   exclusive?: boolean // Nueva propiedad para productos exclusivos
+  downloadUrl?: string; // Added downloadUrl property
 }
 
 export interface CartItem extends Product {

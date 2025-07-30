@@ -37,10 +37,12 @@ export default function Checkout({ setCurrentView }: CheckoutProps) {
         const booksInCart = cart.filter((item) => item.category === "Libros")
         if (booksInCart.length > 0) {
           booksInCart.forEach((book) => {
-            const link = document.createElement("a")
-            link.href = `/downloads/${book.id}.pdf` // Ruta simulada para la descarga
-            link.download = `${book.name}.pdf`
-            link.click()
+            if (book.downloadUrl) {
+              const link = document.createElement("a")
+              link.href = book.downloadUrl // Usar la URL específica del producto
+              link.download = `${book.name}.pdf`
+              link.click()
+            }
           })
         }
 
