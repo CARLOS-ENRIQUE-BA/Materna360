@@ -88,6 +88,16 @@ export default function Footer() {
                   Términos y Condiciones
                 </a>
               </li>
+              <li>
+                <a
+                  href="https://drive.google.com/file/d/1W5TO7HMuvpeAPwCuQyAleFmRJM-15j10/view?usp=drivesdk"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#62615F] hover:text-[#790B5A] transition-colors duration-200"
+                >
+                  Podcast
+                </a>
+              </li>
             </ul>
           </div>
 

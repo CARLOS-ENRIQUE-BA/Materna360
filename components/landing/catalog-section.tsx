@@ -214,7 +214,7 @@ export default function CatalogSection() {
                 <Button
                   onClick={() => window.open("/login", "_blank")}
                   variant="outline"
-                  className="border-white text-white hover:bg-white hover:text-[#790B5A] font-semibold px-8 py-3 rounded-xl transition-all duration-300"
+                  className="border-white text-[#C15DA4] hover:bg-white hover:text-[#790B5A] font-semibold px-8 py-3 rounded-xl transition-all duration-300"
                 >
                   Ya Tengo Cuenta
                 </Button>

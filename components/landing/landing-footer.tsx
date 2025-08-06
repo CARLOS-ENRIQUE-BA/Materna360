@@ -1,6 +1,6 @@
 "use client"
 
-import { Heart, Baby, Instagram, Mail, Phone } from "lucide-react"
+import { Heart, Baby, Instagram, Mail, Phone, MicVocal } from "lucide-react"
 import Logo from "../../assets/Logo-M360.png"
 
 export default function LandingFooter() {
@@ -31,6 +31,19 @@ export default function LandingFooter() {
               Acompañamos a madres y familias con atención nutricional especializada, educación basada en evidencia y
               productos funcionales para el bienestar desde el inicio de la vida.
             </p>
+            <div className="space-y-3">
+              <div className="flex items-center space-x-3 text-[#62615F]">
+                <MicVocal className="w-4 h-4 text-[#C15DA4]" />
+              <a
+                href="https://drive.google.com/file/d/1W5TO7HMuvpeAPwCuQyAleFmRJM-15j10/view?usp=drivesdk"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#62615F] hover:text-[#790B5A] transition-colors duration-200"
+              >
+                Podcast
+              </a>
+              </div>
+            </div>
           </div>
 
           {/* Empty space for alignment */}
@@ -99,3 +112,4 @@ export default function LandingFooter() {
     </footer>
   )
 }
+
